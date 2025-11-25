@@ -30,7 +30,7 @@ export default function Header() {
               <span>Log In</span>
             </Link>
             <Link 
-              to="/login" 
+              to="/signup" 
               className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-5 bg-primary text-white text-sm font-bold transition-opacity hover:opacity-90"
             >
               <span>Sign Up</span>
