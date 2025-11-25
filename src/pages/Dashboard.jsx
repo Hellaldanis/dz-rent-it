@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
 
 const mockRentals = [
@@ -43,6 +44,7 @@ const mockMyItems = [
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('rentals');
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,6 +56,16 @@ export default function Dashboard() {
   }, []);
 
   const getStatusColor = (status) => {
+    const statusMap = {
+      'Pending': 'pending',
+      'Confirmed': 'confirmed',
+      'Completed': 'completed',
+      'Canceled': 'canceled',
+      'Active': 'active'
+    };
+    
+    const translatedStatus = t(statusMap[status] || status.toLowerCase());
+    
     switch (status) {
       case 'Pending':
         return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400';
@@ -76,13 +88,13 @@ export default function Dashboard() {
 
       <main className="bg-background-light dark:bg-background-dark p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
         <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-          <h1 className="text-text-light dark:text-text-dark text-4xl font-black">My Dashboard</h1>
+          <h1 className="text-text-light dark:text-text-dark text-4xl font-black">{t('myDashboard')}</h1>
           <Link 
             to="/publish"
             className="flex items-center justify-center gap-2 px-4 h-10 bg-primary text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity"
           >
             <span className="material-symbols-outlined">add</span>
-            <span>Add New Item</span>
+            <span>{t('addNewItem')}</span>
           </Link>
         </div>
 
@@ -98,7 +110,7 @@ export default function Dashboard() {
               }`}
             >
               <span className="material-symbols-outlined text-lg">shopping_bag</span>
-              <p className="text-sm font-bold">My Rentals</p>
+              <p className="text-sm font-bold">{t('myRentals')}</p>
             </button>
             <button
               onClick={() => setActiveTab('items')}
@@ -109,7 +121,7 @@ export default function Dashboard() {
               }`}
             >
               <span className="material-symbols-outlined text-lg">category</span>
-              <p className="text-sm font-bold">My Items</p>
+              <p className="text-sm font-bold">{t('myItems')}</p>
               <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-white text-[10px] font-bold">
                 {mockMyItems.length}
               </span>

@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import ItemCard from '../components/ItemCard';
@@ -62,6 +64,19 @@ const mockItems = [
 ];
 
 export default function Home() {
+  const [showHeaderSearch, setShowHeaderSearch] = useState(false);
+  const { t } = useLanguage();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show header search when scrolled past hero section (approximately 400px)
+      setShowHeaderSearch(window.scrollY > 400);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleSearch = (query) => {
     console.log('Searching for:', query);
     // Navigation vers la page catalog avec la recherche
@@ -69,7 +84,7 @@ export default function Home() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col">
-      <Header />
+      <Header hideSearch={!showHeaderSearch} />
       
       <main className="flex-grow">
         {/* Hero Section */}
@@ -77,10 +92,10 @@ export default function Home() {
           <div className="flex flex-col items-center text-center gap-8">
             <div className="flex flex-col gap-4">
               <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl text-text-light dark:text-text-dark">
-                Rent Anything, Anytime
+                {t('heroTitle')}
               </h1>
               <h2 className="max-w-2xl text-base sm:text-lg text-text-muted-light dark:text-text-muted-dark">
-                Discover thousands of items to rent from people in your community.
+                {t('heroSubtitle')}
               </h2>
             </div>
             <SearchBar onSearch={handleSearch} />
@@ -90,7 +105,7 @@ export default function Home() {
         {/* Recently Added Section */}
         <section className="container mx-auto px-4 py-12">
           <h2 className="text-text-light dark:text-text-dark text-2xl font-bold tracking-tight mb-6">
-            Recently Added
+            {t('recentlyAdded')}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {mockItems.map(item => (

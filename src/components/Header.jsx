@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import { useState, useRef, useEffect } from 'react';
 
-export default function Header({ showAddButton = false }) {
+export default function Header({ showAddButton = false, hideSearch = false }) {
   const { user, isAuthenticated, logout } = useAuth();
+  const { language, toggleLanguage, t } = useLanguage();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -31,14 +33,24 @@ export default function Header({ showAddButton = false }) {
         </Link>
         
         <div className="hidden md:flex flex-1 justify-end items-center gap-8">
-          <label className="relative flex-grow max-w-sm">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark">search</span>
-            <input 
-              className="form-input w-full rounded-full border-none bg-secondary-light dark:bg-secondary-dark h-10 placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" 
-              placeholder="Search for anything" 
-              type="search"
-            />
-          </label>
+          {!hideSearch && (
+            <label className="relative flex-grow max-w-sm">
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark">search</span>
+              <input 
+                className="form-input w-full rounded-full border-none bg-secondary-light dark:bg-secondary-dark h-10 placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" 
+                placeholder={t('searchPlaceholder')}
+                type="search"
+              />
+            </label>
+          )}
+          
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center justify-center h-10 w-10 rounded-full bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark font-bold text-sm transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+            title={language === 'en' ? 'العربية' : 'English'}
+          >
+            {language === 'en' ? 'ع' : 'EN'}
+          </button>
           
           {isAuthenticated ? (
             <div className="flex items-center gap-4">
@@ -48,14 +60,14 @@ export default function Header({ showAddButton = false }) {
                   className="flex items-center justify-center gap-2 px-4 h-10 bg-primary text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity"
                 >
                   <span className="material-symbols-outlined">add</span>
-                  <span>Add New Item</span>
+                  <span>{t('addNewItem')}</span>
                 </Link>
               )}
               
               <Link 
                 to="/dashboard" 
                 className="flex items-center justify-center rounded-full h-10 w-10 bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
-                title="Dashboard"
+                title={t('dashboard')}
               >
                 <span className="material-symbols-outlined">dashboard</span>
               </Link>
@@ -86,7 +98,7 @@ export default function Header({ showAddButton = false }) {
                       className="flex items-center gap-3 px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-background-dark transition-colors"
                     >
                       <span className="material-symbols-outlined text-lg">person</span>
-                      <span>My Profile</span>
+                      <span>{t('profile')}</span>
                     </Link>
                     
                     <Link
@@ -95,7 +107,7 @@ export default function Header({ showAddButton = false }) {
                       className="flex items-center gap-3 px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-background-dark transition-colors"
                     >
                       <span className="material-symbols-outlined text-lg">dashboard</span>
-                      <span>Dashboard</span>
+                      <span>{t('dashboard')}</span>
                     </Link>
                     
                     <div className="border-t border-secondary-light dark:border-secondary-dark mt-2 pt-2">
@@ -107,7 +119,7 @@ export default function Header({ showAddButton = false }) {
                         className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-500 hover:bg-secondary-light dark:hover:bg-background-dark transition-colors"
                       >
                         <span className="material-symbols-outlined text-lg">logout</span>
-                        <span>Log Out</span>
+                        <span>{t('logout')}</span>
                       </button>
                     </div>
                   </div>
@@ -120,13 +132,13 @@ export default function Header({ showAddButton = false }) {
                 to="/login" 
                 className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-5 bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark text-sm font-bold transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
               >
-                <span>Log In</span>
+                <span>{t('login')}</span>
               </Link>
               <Link 
                 to="/signup" 
                 className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-5 bg-primary text-white text-sm font-bold transition-opacity hover:opacity-90"
               >
-                <span>Sign Up</span>
+                <span>{t('signup')}</span>
               </Link>
             </div>
           )}
