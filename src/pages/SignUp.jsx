@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function SignUp() {
+  const { signup } = useAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -44,9 +47,19 @@ export default function SignUp() {
       return;
     }
     
-    // Handle sign up logic here
-    console.log('Sign up data:', formData);
+    // Create user account
+    const userData = {
+      fullName: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      city: formData.city,
+      address: formData.address,
+      dateOfBirth: formData.dateOfBirth
+    };
+    
+    signup(userData);
     alert('Compte créé avec succès !');
+    navigate('/dashboard');
   };
 
   return (

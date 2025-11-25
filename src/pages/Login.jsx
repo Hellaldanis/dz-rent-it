@@ -1,8 +1,37 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Mock login - in production, this would call an API
+    const userData = {
+      fullName: 'User Name',
+      email: formData.email,
+      phone: '+213 XXX XX XX XX',
+      city: 'Algiers'
+    };
+    
+    login(userData);
+    navigate('/dashboard');
+  };
 
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-4 bg-background-light dark:bg-background-dark">
@@ -22,7 +51,7 @@ export default function Login() {
         </div>
 
         <div className="rounded-xl border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-secondary-dark p-6 shadow-sm sm:p-8">
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {!isLogin && (
               <div>
                 <label className="flex flex-col">
@@ -40,9 +69,13 @@ export default function Login() {
               <label className="flex flex-col">
                 <p className="pb-2 text-sm font-medium text-text-light dark:text-text-dark">Email</p>
                 <input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="form-input h-12 w-full rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark p-3 text-base text-text-light dark:text-text-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/30"
                   placeholder="Enter your email"
                   type="email"
+                  required
                 />
               </label>
             </div>
@@ -59,9 +92,13 @@ export default function Login() {
                 </div>
                 <div className="relative flex w-full items-stretch">
                   <input
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
                     className="form-input h-12 w-full rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark p-3 pr-10 text-base text-text-light dark:text-text-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/30"
                     placeholder="Enter your password"
                     type="password"
+                    required
                   />
                   <button
                     className="absolute inset-y-0 right-0 flex items-center pr-3 text-text-muted-light dark:text-text-muted-dark"

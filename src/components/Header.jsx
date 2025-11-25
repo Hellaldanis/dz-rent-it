@@ -1,6 +1,23 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useState, useRef, useEffect } from 'react';
 
-export default function Header() {
+export default function Header({ showAddButton = false }) {
+  const { user, isAuthenticated, logout } = useAuth();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-secondary-light dark:border-secondary-dark bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
       <div className="container mx-auto flex items-center justify-between whitespace-nowrap px-4 py-3">
@@ -22,20 +39,97 @@ export default function Header() {
               type="search"
             />
           </label>
-          <div className="flex gap-2">
-            <Link 
-              to="/login" 
-              className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-5 bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark text-sm font-bold transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
-            >
-              <span>Log In</span>
-            </Link>
-            <Link 
-              to="/signup" 
-              className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-5 bg-primary text-white text-sm font-bold transition-opacity hover:opacity-90"
-            >
-              <span>Sign Up</span>
-            </Link>
-          </div>
+          
+          {isAuthenticated ? (
+            <div className="flex items-center gap-4">
+              {showAddButton && (
+                <Link 
+                  to="/publish"
+                  className="flex items-center justify-center gap-2 px-4 h-10 bg-primary text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity"
+                >
+                  <span className="material-symbols-outlined">add</span>
+                  <span>Add New Item</span>
+                </Link>
+              )}
+              
+              <Link 
+                to="/dashboard" 
+                className="flex items-center justify-center rounded-full h-10 w-10 bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+                title="Dashboard"
+              >
+                <span className="material-symbols-outlined">dashboard</span>
+              </Link>
+
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  className="flex items-center justify-center h-10 w-10 rounded-full bg-primary text-white text-lg font-bold hover:opacity-90 transition-opacity"
+                  title="Profile"
+                >
+                  {user?.fullName?.charAt(0).toUpperCase()}
+                </button>
+
+                {showDropdown && (
+                  <div className="absolute right-0 mt-2 w-56 rounded-lg bg-background-light dark:bg-secondary-dark border border-secondary-light dark:border-secondary-dark shadow-lg py-2">
+                    <div className="px-4 py-3 border-b border-secondary-light dark:border-secondary-dark">
+                      <p className="text-sm font-semibold text-text-light dark:text-text-dark">
+                        {user?.fullName}
+                      </p>
+                      <p className="text-xs text-text-muted-light dark:text-text-muted-dark truncate">
+                        {user?.email}
+                      </p>
+                    </div>
+                    
+                    <Link
+                      to="/profile"
+                      onClick={() => setShowDropdown(false)}
+                      className="flex items-center gap-3 px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-background-dark transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-lg">person</span>
+                      <span>My Profile</span>
+                    </Link>
+                    
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setShowDropdown(false)}
+                      className="flex items-center gap-3 px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-background-dark transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-lg">dashboard</span>
+                      <span>Dashboard</span>
+                    </Link>
+                    
+                    <div className="border-t border-secondary-light dark:border-secondary-dark mt-2 pt-2">
+                      <button
+                        onClick={() => {
+                          logout();
+                          setShowDropdown(false);
+                        }}
+                        className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-500 hover:bg-secondary-light dark:hover:bg-background-dark transition-colors"
+                      >
+                        <span className="material-symbols-outlined text-lg">logout</span>
+                        <span>Log Out</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <Link 
+                to="/login" 
+                className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-5 bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark text-sm font-bold transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+              >
+                <span>Log In</span>
+              </Link>
+              <Link 
+                to="/signup" 
+                className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-5 bg-primary text-white text-sm font-bold transition-opacity hover:opacity-90"
+              >
+                <span>Sign Up</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </header>

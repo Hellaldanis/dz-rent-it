@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 const mockRentals = [
@@ -41,6 +42,16 @@ const mockMyItems = [
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('rentals');
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -61,15 +72,18 @@ export default function Dashboard() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col">
-      <Header />
+      <Header showAddButton={isScrolled} />
 
       <main className="bg-background-light dark:bg-background-dark p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
         <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
           <h1 className="text-text-light dark:text-text-dark text-4xl font-black">My Dashboard</h1>
-          <button className="flex items-center justify-center gap-2 px-4 h-10 bg-primary text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity">
+          <Link 
+            to="/publish"
+            className="flex items-center justify-center gap-2 px-4 h-10 bg-primary text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity"
+          >
             <span className="material-symbols-outlined">add</span>
             <span>Add New Item</span>
-          </button>
+          </Link>
         </div>
 
         {/* Tabs */}
