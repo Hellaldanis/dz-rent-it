@@ -10,21 +10,43 @@ export default function SignUp() {
     password: '',
     confirmPassword: '',
     phone: '',
+    address: '',
+    city: '',
+    dateOfBirth: '',
     acceptTerms: false
   });
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
+    const newFormData = {
+      ...formData,
       [name]: type === 'checkbox' ? checked : value
-    }));
+    };
+    setFormData(newFormData);
+    
+    // Check password match
+    if (name === 'password' || name === 'confirmPassword') {
+      if (name === 'password') {
+        setPasswordMatch(value === formData.confirmPassword || formData.confirmPassword === '');
+      } else {
+        setPasswordMatch(value === formData.password);
+      }
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Validate password match
+    if (formData.password !== formData.confirmPassword) {
+      alert('Les mots de passe ne correspondent pas');
+      return;
+    }
+    
     // Handle sign up logic here
     console.log('Sign up data:', formData);
+    alert('Compte créé avec succès !');
   };
 
   return (
@@ -86,16 +108,83 @@ export default function SignUp() {
             <div>
               <label className="flex flex-col">
                 <p className="pb-2 text-sm font-medium text-text-light dark:text-text-dark">
-                  Phone Number
+                  Phone Number <span className="text-red-500">*</span>
                 </p>
                 <input
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
                   className="form-input h-12 w-full rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark p-3 text-base text-text-light dark:text-text-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/30"
-                  placeholder="Enter your phone number"
+                  placeholder="+213 XXX XX XX XX"
                   type="tel"
+                  required
                 />
+              </label>
+            </div>
+
+            <div>
+              <label className="flex flex-col">
+                <p className="pb-2 text-sm font-medium text-text-light dark:text-text-dark">
+                  Date of Birth <span className="text-red-500">*</span>
+                </p>
+                <input
+                  name="dateOfBirth"
+                  value={formData.dateOfBirth}
+                  onChange={handleChange}
+                  className="form-input h-12 w-full rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark p-3 text-base text-text-light dark:text-text-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/30"
+                  type="date"
+                  required
+                />
+              </label>
+            </div>
+
+            <div>
+              <label className="flex flex-col">
+                <p className="pb-2 text-sm font-medium text-text-light dark:text-text-dark">
+                  Address
+                </p>
+                <input
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="form-input h-12 w-full rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark p-3 text-base text-text-light dark:text-text-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/30"
+                  placeholder="Enter your address"
+                  type="text"
+                />
+              </label>
+            </div>
+
+            <div>
+              <label className="flex flex-col">
+                <p className="pb-2 text-sm font-medium text-text-light dark:text-text-dark">
+                  City <span className="text-red-500">*</span>
+                </p>
+                <select
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="form-input h-12 w-full rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark p-3 text-base text-text-light dark:text-text-dark focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/30"
+                  required
+                >
+                  <option value="">Select your city</option>
+                  <option value="Alger">Alger</option>
+                  <option value="Oran">Oran</option>
+                  <option value="Constantine">Constantine</option>
+                  <option value="Annaba">Annaba</option>
+                  <option value="Blida">Blida</option>
+                  <option value="Batna">Batna</option>
+                  <option value="Sétif">Sétif</option>
+                  <option value="Sidi Bel Abbès">Sidi Bel Abbès</option>
+                  <option value="Biskra">Biskra</option>
+                  <option value="Tébessa">Tébessa</option>
+                  <option value="Tlemcen">Tlemcen</option>
+                  <option value="Béjaïa">Béjaïa</option>
+                  <option value="Tiaret">Tiaret</option>
+                  <option value="Bordj Bou Arreridj">Bordj Bou Arreridj</option>
+                  <option value="Djelfa">Djelfa</option>
+                  <option value="Mostaganem">Mostaganem</option>
+                  <option value="Other">Other</option>
+                </select>
               </label>
             </div>
 
@@ -137,7 +226,11 @@ export default function SignUp() {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
-                    className="form-input h-12 w-full rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark p-3 pr-10 text-base text-text-light dark:text-text-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:border-primary focus:outline-0 focus:ring-2 focus:ring-primary/30"
+                    className={`form-input h-12 w-full rounded-lg border ${
+                      !passwordMatch && formData.confirmPassword !== '' 
+                        ? 'border-red-500 focus:ring-red-500/30' 
+                        : 'border-secondary-light dark:border-secondary-dark focus:ring-primary/30'
+                    } bg-background-light dark:bg-background-dark p-3 pr-10 text-base text-text-light dark:text-text-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:border-primary focus:outline-0 focus:ring-2`}
                     placeholder="Confirm your password"
                     type={showConfirmPassword ? 'text' : 'password'}
                     required
@@ -152,6 +245,11 @@ export default function SignUp() {
                     </span>
                   </button>
                 </div>
+                {!passwordMatch && formData.confirmPassword !== '' && (
+                  <p className="mt-1 text-xs text-red-500">
+                    Les mots de passe ne correspondent pas
+                  </p>
+                )}
               </label>
             </div>
 
