@@ -113,12 +113,21 @@ export default function Login() {
           <p className="text-sm text-text-muted-light dark:text-text-muted-dark">
             {isLogin ? "Don't have an account?" : "Already have an account?"}
             {' '}
-            <button
-              onClick={() => setIsLogin(!isLogin)}
-              className="font-semibold text-primary hover:underline"
-            >
-              {isLogin ? 'Create an Account' : 'Log In'}
-            </button>
+            {isLogin ? (
+              <Link
+                to="/signup"
+                className="font-semibold text-primary hover:underline"
+              >
+                Create an Account
+              </Link>
+            ) : (
+              <button
+                onClick={() => setIsLogin(!isLogin)}
+                className="font-semibold text-primary hover:underline"
+              >
+                Log In
+              </button>
+            )}
           </p>
         </div>
       </div>
