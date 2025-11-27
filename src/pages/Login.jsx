@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Footer from '../components/Footer';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -168,6 +169,8 @@ export default function Login() {
           </p>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

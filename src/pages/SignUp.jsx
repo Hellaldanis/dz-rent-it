@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Footer from '../components/Footer';
 
 export default function SignUp() {
   const { signup } = useAuth();
@@ -338,6 +339,8 @@ export default function SignUp() {
           </p>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

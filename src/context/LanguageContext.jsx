@@ -19,6 +19,9 @@ const translations = {
     dashboard: 'Dashboard',
     profile: 'My Profile',
     logout: 'Log Out',
+    home: 'Home',
+    categories: 'Categories',
+    contactUs: 'Contact Us',
     
     // Home
     heroTitle: 'Rent Anything, Anytime',
@@ -118,7 +121,21 @@ const translations = {
     tiaret: 'Tiaret',
     bordjbouarreridj: 'Bordj Bou Arreridj',
     djelfa: 'Djelfa',
-    mostaganem: 'Mostaganem'
+    mostaganem: 'Mostaganem',
+    
+    // Footer
+    aboutUs: 'About Us',
+    aboutDescription: 'DZ-RentIt is Algeria\'s premier peer-to-peer rental platform, connecting people who need items with those who have them.',
+    quickLinks: 'Quick Links',
+    howItWorks: 'How It Works',
+    termsConditions: 'Terms & Conditions',
+    support: 'Support',
+    faq: 'FAQ',
+    helpCenter: 'Help Center',
+    contactSupport: 'Contact Support',
+    followUs: 'Follow Us',
+    allRightsReserved: 'All rights reserved.',
+    madeWithLove: 'Made with ❤️ in Algeria'
   },
   ar: {
     // Header
@@ -128,6 +145,9 @@ const translations = {
     dashboard: 'لوحة التحكم',
     profile: 'ملفي الشخصي',
     logout: 'تسجيل الخروج',
+    home: 'الرئيسية',
+    categories: 'الفئات',
+    contactUs: 'اتصل بنا',
     
     // Home
     heroTitle: 'استأجر أي شيء، في أي وقت',
@@ -227,7 +247,21 @@ const translations = {
     tiaret: 'تيارت',
     bordjbouarreridj: 'برج بوعريريج',
     djelfa: 'الجلفة',
-    mostaganem: 'مستغانم'
+    mostaganem: 'مستغانم',
+    
+    // Footer
+    aboutUs: 'من نحن',
+    aboutDescription: 'DZ-RentIt هي منصة التأجير الرائدة في الجزائر، تربط الأشخاص الذين يحتاجون إلى عناصر مع أولئك الذين لديهم.',
+    quickLinks: 'روابط سريعة',
+    howItWorks: 'كيف يعمل',
+    termsConditions: 'الشروط والأحكام',
+    support: 'الدعم',
+    faq: 'الأسئلة الشائعة',
+    helpCenter: 'مركز المساعدة',
+    contactSupport: 'اتصل بالدعم',
+    followUs: 'تابعنا',
+    allRightsReserved: 'جميع الحقوق محفوظة.',
+    madeWithLove: 'صنع بـ ❤️ في الجزائر'
   }
 };
 

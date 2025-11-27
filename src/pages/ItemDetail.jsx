@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function ItemDetail() {
   const { id } = useParams();
@@ -142,6 +143,8 @@ export default function ItemDetail() {
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

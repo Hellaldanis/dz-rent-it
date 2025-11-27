@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import SearchBar from '../components/SearchBar';
 import ItemCard from '../components/ItemCard';
 
@@ -88,8 +89,17 @@ export default function Home() {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-16 sm:py-24 lg:py-32">
-          <div className="flex flex-col items-center text-center gap-8">
+        <section className="relative container mx-auto px-4 py-16 sm:py-24 lg:py-32">
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl mx-4">
+            <img 
+              src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=1200&auto=format&fit=crop&q=80" 
+              alt="Community sharing" 
+              className="w-full h-full object-cover opacity-10 dark:opacity-5"
+            />
+          </div>
+          
+          <div className="relative z-10 flex flex-col items-center text-center gap-8">
             <div className="flex flex-col gap-4">
               <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl text-text-light dark:text-text-dark">
                 {t('heroTitle')}
@@ -131,6 +141,8 @@ export default function Home() {
           </div>
         </section>
       </main>
+      
+      <Footer />
     </div>
   );
 }

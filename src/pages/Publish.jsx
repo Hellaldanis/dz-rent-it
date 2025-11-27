@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function Publish() {
   const { t } = useLanguage();
@@ -173,6 +174,8 @@ export default function Publish() {
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

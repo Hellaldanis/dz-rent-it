@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import ItemCard from '../components/ItemCard';
 
 const mockItems = [
@@ -147,6 +148,8 @@ export default function Catalog() {
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

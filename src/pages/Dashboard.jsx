@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const mockRentals = [
   {
@@ -216,6 +217,8 @@ export default function Dashboard() {
           </div>
         )}
       </main>
+
+      <Footer />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function Profile() {
   const { user, logout } = useAuth();
@@ -294,6 +295,8 @@ export default function Profile() {
           </div>
         )}
       </main>
+
+      <Footer />
     </div>
   );
 }
