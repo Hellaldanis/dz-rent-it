@@ -1,35 +1,46 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { mockItems } from '../data/mockItems';
 
 export default function ItemDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  // Mock data - dans une vraie app, on ferait un fetch avec l'id
-  const item = {
-    id: id,
-    title: "High-Quality Professional Camera",
-    description: "Professional-grade camera perfect for photography enthusiasts and professionals. Includes lens, tripod, carrying case, and all necessary accessories.",
-    price: 85,
-    location: "Algiers, Algeria",
-    owner: {
-      name: "Ahmed Benali",
-      avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuC45IZEopj1c7Sv4duCahD6HWeQrrsaeIvRdIxcjyVU883D_aiGdjrHcoYWRzvmbw0OD4WuCN75gblnMUtqRdbdvoWTBO-0t3qkW3nEvKH_0w52q5dGz66j9A1YPq3xVPw6pBEa3iUO0YyVhGsjlVq5AeeURlHtFCDjy6hsIWL1I2Tq0ra1FBv0gfXwvYYyrAUnKPJZ9DrRU79AlIgsF9-k69q22kUGhwvCNHt1tqXwtl8Kn_lfQVg_tZW2MJZMApUdYRECGBI45z6D"
-    },
-    images: [
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuD7HtuWaNVfNfn2484Fkukx-ArX3ZRk7om4gGiPZdMwWKDmIgejljz5pMawx6gm4HOLe27zpcR16f1yU0JwUOh9NCUC2cBUrBK4Ldj100Xz5Dhq3e5flbNHbVASfz-iGjOUJiDvV-l8nO_nO2bS7PtdTCCWt7DK01_qU0bBlAWBktPyfaAkOHBJzP1Cvg1R-qQxCHw18MwCJzR3i5aJDWMmdnZzOl6ejIyEngHOdNw16gxRWco0GHtUEdH0fRrka6fpGznScIGgRqHA",
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAzEuPKamw9prGcV0OX94hF70ROG3uzShcR2Y0LKDDU1QzMLfattBAdP4aDc2EGR8W0lDW-wwvMZuEcuy_c6P8P7kh7oVIWSTxsVixCCmzGzhp8hTyT39KFYybUV2hhfhRoWaUBkuxsM38Pm5hSN21du5DYo75-xdB9fsdQdnv0i1THHJYmJmPcOyoMPBobd7HL1qrUJUpmS1a9yr0ImG99Ycyp8j4iPJHqx8l7fqA2e5PY-3q4W6-2XrOiCsH6U5_tIqu26CBUiewn",
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuC7h_nvcBRl8c_HGz2XgB5eY4NHeKmWnGSPpiVvc_jcMaxovXpw8BNMXy6K8OGXoEdq46x7Oh6wOvLbcugxO4nf672BrR414vC8oR52RS8f0DWEEN-nQK5eZZBgnmTAS7E7pJsfSqPykoDTA8h7J3jA4ADu-55SjO56-F04PGqXmy-pCQSYDI9MpISZdmTa-__IrLnll3hAvcH8fZ_DTKne2Z9CI1veZH9joi1LNGlbyfEtDzWxz_35Jlh9obSoMF8uf0aTDZPTE9j2",
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDy-l5toBkWti97DTmEftbV5cv3PTIyUroMg3AslXaKuO88eycDLbxbj0KYd6mSuqo2X3xKWbh3mM8K9AkoVf_bMwA1kPMUHG_g2gMiD1UydzrDbgt_OfpK-ZGfpC0tSBKTbMy4zF-qHXL6Mu2DSdtvOYmyEK5KMutw5QcpAnKDzAeG9p40eovq9gb3d6rC2DPep7IF_yK_JzpJHwwUNnxA8cvhfCTUYDEESGYw_WRg16bNa3ZRCuQs_zih-yxmJpoJFtbzAB9Q1ZYu"
-    ],
-    features: [
-      "42MP Full-Frame Sensor",
-      "8K Video Recording",
-      "Dual Card Slots",
-      "In-Body Image Stabilization",
-      "Weather Sealed Body"
-    ]
-  };
+  // Scroll vers le haut quand la page se charge
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  // Trouver l'item correspondant à l'ID
+  const item = mockItems.find(item => item.id === parseInt(id));
+
+  // Si l'item n'existe pas, afficher une erreur
+  if (!item) {
+    return (
+      <div className="relative flex min-h-screen w-full flex-col">
+        <Header />
+        <main className="flex-1 flex items-center justify-center px-4">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-text-light dark:text-text-dark mb-4">
+              Item not found
+            </h1>
+            <p className="text-text-muted-light dark:text-text-muted-dark mb-6">
+              The item you're looking for doesn't exist.
+            </p>
+            <button
+              onClick={() => navigate('/catalog')}
+              className="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:opacity-90"
+            >
+              Back to Catalog
+            </button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex min-h-screen w-full flex-col">
@@ -46,17 +57,8 @@ export default function ItemDetail() {
             <div className="lg:col-span-3 flex flex-col gap-4">
               <div 
                 className="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-gray-200 dark:bg-gray-800 rounded-xl min-h-80 aspect-video"
-                style={{ backgroundImage: `url("${item.images[0]}")` }}
+                style={{ backgroundImage: `url("${item.image}")` }}
               />
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-3">
-                {item.images.slice(1).map((img, idx) => (
-                  <div 
-                    key={idx}
-                    className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
-                    style={{ backgroundImage: `url("${img}")` }}
-                  />
-                ))}
-              </div>
             </div>
 
             {/* Booking Card */}
@@ -113,31 +115,33 @@ export default function ItemDetail() {
                 {item.description}
               </p>
 
-              <h2 className="text-2xl font-bold text-text-light dark:text-text-dark mt-8 mb-4">Features</h2>
-              <ul className="space-y-2">
-                {item.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center gap-2 text-text-light dark:text-text-dark">
-                    <span className="material-symbols-outlined text-primary">check_circle</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              <h2 className="text-2xl font-bold text-text-light dark:text-text-dark mt-8 mb-4">Category</h2>
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary font-medium">
+                {item.category}
+              </div>
             </div>
 
             {/* Owner Info */}
             <div className="lg:col-span-1">
               <div className="rounded-xl bg-background-light dark:bg-secondary-dark p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-text-light dark:text-text-dark mb-4">Owner</h2>
-                <div className="flex items-center gap-4">
-                  <div 
-                    className="w-16 h-16 rounded-full bg-cover bg-center"
-                    style={{ backgroundImage: `url("${item.owner.avatar}")` }}
-                  />
-                  <div>
-                    <p className="font-bold text-text-light dark:text-text-dark">{item.owner.name}</p>
-                    <p className="text-sm text-text-muted-light dark:text-text-muted-dark">Member since 2023</p>
+                <Link to={`/user/${item.owner.toLowerCase().replace(' ', '-').replace('.', '')}`}>
+                  <div className="flex items-center gap-4 mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                    <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white text-2xl font-bold">
+                      {item.owner.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-bold text-text-light dark:text-text-dark">{item.owner}</p>
+                      <div className="flex items-center gap-1 text-sm text-text-muted-light dark:text-text-muted-dark">
+                        <span className="material-symbols-outlined text-yellow-500 text-base">star</span>
+                        <span>{item.rating} ({item.reviews} reviews)</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </Link>
+                <button className="w-full py-2 px-4 border border-secondary-light dark:border-secondary-dark rounded-lg font-medium text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-gray-700 transition-colors">
+                  Contact Owner
+                </button>
               </div>
             </div>
           </div>

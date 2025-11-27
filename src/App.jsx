@@ -9,6 +9,7 @@ import SignUp from './pages/SignUp';
 import Publish from './pages/Publish';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import PublicProfile from './pages/PublicProfile';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/publish" element={<Publish />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/user/:userId" element={<PublicProfile />} />
             </Routes>
           </div>
         </Router>
