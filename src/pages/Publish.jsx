@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
 
 export default function Publish() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -30,7 +32,7 @@ export default function Publish() {
         <div className="w-full max-w-3xl">
           <div className="mb-8 text-center">
             <h1 className="text-4xl font-black tracking-tight text-text-light dark:text-text-dark sm:text-5xl">
-              List Your Item for Rent
+              {t('listYourItem')}
             </h1>
           </div>
 
@@ -39,49 +41,49 @@ export default function Publish() {
               {/* Item Details Section */}
               <section>
                 <h2 className="border-b border-secondary-light dark:border-secondary-dark pb-3 text-2xl font-bold text-text-light dark:text-text-dark">
-                  Item Details
+                  {t('itemDetails')}
                 </h2>
                 <div className="mt-6 grid grid-cols-1 gap-6">
                   <label className="flex flex-col">
-                    <p className="pb-2 text-base font-medium text-text-light dark:text-text-dark">Title</p>
+                    <p className="pb-2 text-base font-medium text-text-light dark:text-text-dark">{t('title')}</p>
                     <input
                       name="title"
                       value={formData.title}
                       onChange={handleChange}
                       className="form-input h-12 px-4 text-base rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark"
-                      placeholder="What are you renting?"
+                      placeholder={t('whatAreYouRenting')}
                       type="text"
                     />
                   </label>
 
                   <label className="flex flex-col">
-                    <p className="pb-2 text-base font-medium text-text-light dark:text-text-dark">Description</p>
+                    <p className="pb-2 text-base font-medium text-text-light dark:text-text-dark">{t('description')}</p>
                     <textarea
                       name="description"
                       value={formData.description}
                       onChange={handleChange}
                       className="form-input min-h-32 px-4 py-3 text-base rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark"
-                      placeholder="Describe your item, its condition, and what's included..."
+                      placeholder={t('describeYourItem')}
                     />
                   </label>
 
                   <label className="flex flex-col">
-                    <p className="pb-2 text-base font-medium text-text-light dark:text-text-dark">Category</p>
+                    <p className="pb-2 text-base font-medium text-text-light dark:text-text-dark">{t('category')}</p>
                     <select
                       name="category"
                       value={formData.category}
                       onChange={handleChange}
                       className="form-input h-12 px-4 text-base rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark"
                     >
-                      <option value="">Select a category</option>
-                      <option value="electronics">Electronics</option>
-                      <option value="photography">Photography</option>
-                      <option value="gaming">Gaming</option>
-                      <option value="sports">Sports</option>
-                      <option value="music">Music</option>
-                      <option value="tools">Tools</option>
-                      <option value="vehicles">Vehicles</option>
-                      <option value="other">Other</option>
+                      <option value="">{t('selectCategory')}</option>
+                      <option value="electronics">{t('electronics')}</option>
+                      <option value="photography">{t('photography')}</option>
+                      <option value="gaming">{t('gaming')}</option>
+                      <option value="sports">{t('sports')}</option>
+                      <option value="music">{t('music')}</option>
+                      <option value="tools">{t('tools')}</option>
+                      <option value="vehicles">{t('vehicles')}</option>
+                      <option value="other">{t('other')}</option>
                     </select>
                   </label>
                 </div>
@@ -90,11 +92,11 @@ export default function Publish() {
               {/* Pricing Section */}
               <section>
                 <h2 className="border-b border-secondary-light dark:border-secondary-dark pb-3 text-2xl font-bold text-text-light dark:text-text-dark">
-                  Pricing
+                  {t('pricing')}
                 </h2>
                 <div className="mt-6 grid grid-cols-1 gap-6">
                   <label className="flex flex-col">
-                    <p className="pb-2 text-base font-medium text-text-light dark:text-text-dark">Daily Rate (DZD)</p>
+                    <p className="pb-2 text-base font-medium text-text-light dark:text-text-dark">{t('dailyRate')}</p>
                     <input
                       name="price"
                       value={formData.price}
@@ -110,11 +112,11 @@ export default function Publish() {
               {/* Location Section */}
               <section>
                 <h2 className="border-b border-secondary-light dark:border-secondary-dark pb-3 text-2xl font-bold text-text-light dark:text-text-dark">
-                  Location
+                  {t('location')}
                 </h2>
                 <div className="mt-6 grid grid-cols-1 gap-6">
                   <label className="flex flex-col">
-                    <p className="pb-2 text-base font-medium text-text-light dark:text-text-dark">City</p>
+                    <p className="pb-2 text-base font-medium text-text-light dark:text-text-dark">{t('city')}</p>
                     <input
                       name="location"
                       value={formData.location}

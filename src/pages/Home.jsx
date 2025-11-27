@@ -117,15 +117,15 @@ export default function Home() {
         {/* Categories Section */}
         <section className="container mx-auto px-4 py-12">
           <h2 className="text-text-light dark:text-text-dark text-2xl font-bold tracking-tight mb-6">
-            Browse by Category
+            {t('browseByCategory')}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {['Electronics', 'Vehicles', 'Tools', 'Sports', 'Photography', 'Music', 'Gaming', 'Other'].map((category) => (
+            {['electronics', 'vehicles', 'tools', 'sports', 'photography', 'music', 'gaming', 'other'].map((category) => (
               <div 
                 key={category}
                 className="flex items-center justify-center h-24 rounded-xl bg-secondary-light dark:bg-secondary-dark cursor-pointer transition-all hover:shadow-lg hover:scale-105"
               >
-                <span className="text-text-light dark:text-text-dark font-semibold">{category}</span>
+                <span className="text-text-light dark:text-text-dark font-semibold">{t(category)}</span>
               </div>
             ))}
           </div>

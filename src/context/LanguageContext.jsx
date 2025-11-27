@@ -24,6 +24,7 @@ const translations = {
     heroTitle: 'Rent Anything, Anytime',
     heroSubtitle: 'Discover thousands of items to rent from people in your community.',
     recentlyAdded: 'Recently Added',
+    browseByCategory: 'Browse by Category',
     perDay: 'per day',
     
     // Dashboard
@@ -132,6 +133,7 @@ const translations = {
     heroTitle: 'استأجر أي شيء، في أي وقت',
     heroSubtitle: 'اكتشف آلاف العناصر المتاحة للإيجار من الأشخاص في مجتمعك.',
     recentlyAdded: 'المضافة حديثاً',
+    browseByCategory: 'تصفح حسب الفئة',
     perDay: 'في اليوم',
     
     // Dashboard
