@@ -34,6 +34,19 @@ export default function Login() {
     navigate('/dashboard');
   };
 
+  const handleGoogleLogin = () => {
+    // Mock Google login - in production, this would use Google OAuth
+    const userData = {
+      fullName: 'Google User',
+      email: 'user@gmail.com',
+      phone: '+213 XXX XX XX XX',
+      city: 'Algiers'
+    };
+    
+    login(userData);
+    navigate('/dashboard');
+  };
+
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center p-4 bg-background-light dark:bg-background-dark">
       <div className="w-full max-w-md">
@@ -128,7 +141,11 @@ export default function Login() {
           </div>
 
           <div>
-            <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-secondary-dark px-5 text-base font-medium text-text-light dark:text-text-dark transition-colors hover:bg-secondary-light dark:hover:bg-gray-700">
+            <button 
+              type="button"
+              onClick={handleGoogleLogin}
+              className="flex h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-secondary-dark px-5 text-base font-medium text-text-light dark:text-text-dark transition-colors hover:bg-secondary-light dark:hover:bg-gray-700"
+            >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_1001_3)">
                   <path d="M22.0427 12.2381C22.0427 11.3918 21.9688 10.5909 21.8375 9.81818H12.2478V14.4545H17.8285C17.5853 15.9398 16.7844 17.2148 15.5489 18.0193V20.7057H19.4313C21.0841 19.2318 22.0427 17.0352 22.0427 14.4136C22.0427 13.6932 21.9904 12.9614 21.9012 12.2381H22.0427Z" fill="#4285F4" />

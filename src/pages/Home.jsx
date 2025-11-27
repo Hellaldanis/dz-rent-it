@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -131,12 +132,13 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {['electronics', 'vehicles', 'tools', 'sports', 'photography', 'music', 'gaming', 'other'].map((category) => (
-              <div 
+              <Link
                 key={category}
+                to={`/catalog?category=${category}`}
                 className="flex items-center justify-center h-24 rounded-xl bg-secondary-light dark:bg-secondary-dark cursor-pointer transition-all hover:shadow-lg hover:scale-105"
               >
                 <span className="text-text-light dark:text-text-dark font-semibold">{t(category)}</span>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
