@@ -15,8 +15,8 @@ export default {
         "secondary-dark": "#2c2c2e",
         "text-light": "#1D1D1F",
         "text-dark": "#F5F5F7",
-        "text-muted-light": "#6E6E73",
-        "text-muted-dark": "#8E8E93"
+        "text-muted-light": "#4A4A4F",  // Improved contrast from #6E6E73
+        "text-muted-dark": "#A1A1A6"    // Improved contrast from #8E8E93
       },
       fontFamily: {
         "display": ["Inter", "sans-serif"]

@@ -77,6 +77,45 @@ const mockNotifications = [
   }
 ];
 
+const mockMessages = [
+  {
+    id: 1,
+    name: 'Ahmed K.',
+    avatar: 'https://ui-avatars.com/api/?name=Ahmed+K&background=3b82f6&color=fff',
+    lastMessage: 'Is the camera still available for next week?',
+    time: '5 min ago',
+    unread: 2,
+    item: 'Canon EOS R5 Camera'
+  },
+  {
+    id: 2,
+    name: 'Yasmine M.',
+    avatar: 'https://ui-avatars.com/api/?name=Yasmine+M&background=10b981&color=fff',
+    lastMessage: 'Thank you! The drone was in perfect condition.',
+    time: '1 hour ago',
+    unread: 0,
+    item: 'DJI Mavic Drone'
+  },
+  {
+    id: 3,
+    name: 'Karim L.',
+    avatar: 'https://ui-avatars.com/api/?name=Karim+L&background=f59e0b&color=fff',
+    lastMessage: 'Can we extend the rental by 2 more days?',
+    time: '3 hours ago',
+    unread: 1,
+    item: 'Gaming Console PS5'
+  },
+  {
+    id: 4,
+    name: 'Sofia B.',
+    avatar: 'https://ui-avatars.com/api/?name=Sofia+B&background=8b5cf6&color=fff',
+    lastMessage: 'I saw your listing. When is it available?',
+    time: '1 day ago',
+    unread: 0,
+    item: 'Electric Scooter'
+  }
+];
+
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('rentals');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -208,11 +247,25 @@ export default function Dashboard() {
             >
               <span className="material-symbols-outlined text-lg">notifications</span>
               <p className="text-sm font-bold">Notifications</p>
-              {unreadCount > 0 && (
+              {notifications.filter(n => !n.read).length > 0 && (
                 <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-white text-[10px] font-bold">
-                  {unreadCount}
+                  {notifications.filter(n => !n.read).length}
                 </span>
               )}
+            </button>
+            <button
+              onClick={() => setActiveTab('messages')}
+              className={`relative flex items-center justify-center border-b-[3px] pb-3 pt-2 gap-2 transition-colors ${
+                activeTab === 'messages'
+                  ? 'border-b-primary text-text-light dark:text-text-dark'
+                  : 'border-b-transparent text-text-muted-light dark:text-text-muted-dark'
+              }`}
+            >
+              <span className="material-symbols-outlined text-lg">chat</span>
+              <p className="text-sm font-bold">Messages</p>
+              <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-white text-[10px] font-bold">
+                3
+              </span>
             </button>
           </div>
         </div>
@@ -304,7 +357,7 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
-        ) : (
+        ) : activeTab === 'notifications' ? (
           <div>
             <h2 className="text-text-light dark:text-text-dark text-[22px] font-bold mb-4">
               Notifications
@@ -353,6 +406,79 @@ export default function Dashboard() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-text-light dark:text-text-dark text-[22px] font-bold">
+                Messages
+              </h2>
+              <Link to="/messages">
+                <button className="flex items-center gap-2 py-2 px-4 bg-primary text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
+                  <span className="material-symbols-outlined text-lg">open_in_new</span>
+                  View All
+                </button>
+              </Link>
+            </div>
+            <div className="space-y-3">
+              {mockMessages.map((message) => (
+                <Link key={message.id} to="/messages">
+                  <div className="flex gap-4 p-4 rounded-xl bg-background-light dark:bg-secondary-dark hover:shadow-md cursor-pointer transition-all">
+                    <img 
+                      src={message.avatar} 
+                      alt={message.name}
+                      className="w-12 h-12 rounded-full flex-shrink-0"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-text-light dark:text-text-dark font-semibold truncate">
+                            {message.name}
+                          </p>
+                          <p className="text-text-muted-light dark:text-text-muted-dark text-xs mt-0.5">
+                            {message.item}
+                          </p>
+                        </div>
+                        <div className="flex flex-col items-end gap-1">
+                          <p className="text-text-muted-light dark:text-text-muted-dark text-xs whitespace-nowrap">
+                            {message.time}
+                          </p>
+                          {message.unread > 0 && (
+                            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white text-[10px] font-bold">
+                              {message.unread}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <p className={`text-sm mt-2 truncate ${
+                        message.unread > 0 
+                          ? 'text-text-light dark:text-text-dark font-medium' 
+                          : 'text-text-muted-light dark:text-text-muted-dark'
+                      }`}>
+                        {message.lastMessage}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div className="mt-6 p-6 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <span className="material-symbols-outlined text-blue-600 dark:text-blue-400 text-3xl">
+                    chat_bubble
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-text-light dark:text-text-dark font-bold mb-1">
+                    Stay Connected
+                  </h3>
+                  <p className="text-text-muted-light dark:text-text-muted-dark text-sm">
+                    Respond quickly to increase your booking rate. Renters prefer hosts who reply within an hour.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         )}

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 
 export default function Header({ showAddButton = false, hideSearch = false }) {
   const { user, isAuthenticated, logout } = useAuth();
@@ -17,21 +17,27 @@ export default function Header({ showAddButton = false, hideSearch = false }) {
   const [unreadMessages, setUnreadMessages] = useState(3);
   const [unreadNotifications, setUnreadNotifications] = useState(2);
   const [unreadPayments, setUnreadPayments] = useState(1);
-  const totalUnread = unreadMessages + unreadNotifications + unreadPayments;
+  
+  // Memoize total unread to avoid recalculation
+  const totalUnread = useMemo(() => 
+    unreadMessages + unreadNotifications + unreadPayments,
+    [unreadMessages, unreadNotifications, unreadPayments]
+  );
+
+  // Memoize click outside handler
+  const handleClickOutside = useCallback((event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowDropdown(false);
+    }
+    if (dashboardMenuRef.current && !dashboardMenuRef.current.contains(event.target)) {
+      setShowDashboardMenu(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowDropdown(false);
-      }
-      if (dashboardMenuRef.current && !dashboardMenuRef.current.contains(event.target)) {
-        setShowDashboardMenu(false);
-      }
-    };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [handleClickOutside]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-secondary-light dark:border-secondary-dark bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
