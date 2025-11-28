@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { FavoritesProvider } from './context/FavoritesContext';
 
 // Lazy load all pages for better performance
 const Home = lazy(() => import('./pages/Home'));
@@ -22,6 +23,7 @@ const HelpCenter = lazy(() => import('./pages/HelpCenter'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Messages = lazy(() => import('./pages/Messages'));
 const Payments = lazy(() => import('./pages/Payments'));
+const Favorites = lazy(() => import('./pages/Favorites'));
 const BookingRequest = lazy(() => import('./pages/BookingRequest'));
 const BookingConfirmation = lazy(() => import('./pages/BookingConfirmation'));
 
@@ -30,6 +32,7 @@ function App() {
     <ThemeProvider>
       <LanguageProvider>
         <AuthProvider>
+          <FavoritesProvider>
           <Router>
             <div className="bg-background-light dark:bg-background-dark min-h-screen">
               <Suspense fallback={
@@ -58,12 +61,14 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/payments" element={<Payments />} />
+              <Route path="/favorites" element={<Favorites />} />
               <Route path="/booking-request" element={<BookingRequest />} />
                 <Route path="/booking-confirmation" element={<BookingConfirmation />} />
               </Routes>
               </Suspense>
             </div>
           </Router>
+          </FavoritesProvider>
         </AuthProvider>
       </LanguageProvider>
     </ThemeProvider>

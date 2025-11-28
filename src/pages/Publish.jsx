@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function Publish() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -23,6 +25,9 @@ export default function Publish() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
+    // Simuler le succès et rediriger
+    alert(t('itemPublished') || 'Item published successfully!');
+    navigate('/dashboard');
   };
 
   return (

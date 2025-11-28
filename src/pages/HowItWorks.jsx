@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useEffect } from 'react';
-import { useLanguage } from '../context/LanguageContext';
 
 const steps = [
   {
@@ -118,12 +119,12 @@ export default function HowItWorks() {
             }
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/catalog" className="px-8 py-3 bg-white text-primary rounded-lg font-bold hover:bg-gray-100 transition-colors">
+            <Link to="/catalog" className="px-8 py-3 bg-white text-primary rounded-lg font-bold hover:bg-gray-100 transition-colors">
               {language === 'ar' ? 'تصفح العناصر' : 'Browse Items'}
-            </a>
-            <a href="/publish" className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-bold hover:bg-white hover:text-primary transition-colors">
+            </Link>
+            <Link to="/publish" className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-bold hover:bg-white hover:text-primary transition-colors">
               {language === 'ar' ? 'انشر عنصر' : 'List an Item'}
-            </a>
+            </Link>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -10,6 +10,7 @@ import { mockItems } from '../data/mockItems';
 export default function Home() {
   const [showHeaderSearch, setShowHeaderSearch] = useState(false);
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,8 +23,11 @@ export default function Home() {
   }, []);
 
   const handleSearch = (query) => {
-    console.log('Searching for:', query);
-    // Navigation vers la page catalog avec la recherche
+    if (query && query.trim()) {
+      navigate(`/catalog?search=${encodeURIComponent(query.trim())}`);
+    } else {
+      navigate('/catalog');
+    }
   };
 
   return (

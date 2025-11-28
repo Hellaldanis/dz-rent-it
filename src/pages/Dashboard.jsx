@@ -6,17 +6,17 @@ import Footer from '../components/Footer';
 
 const mockRentals = [
   {
-    id: 1,
-    title: "Pro DSLR Camera",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBBbKb3ng9vIDUM2mSg48XLV_JFMRAQa_T-QbYjbNzv65eplHNGbPDvkEgJ9_CWoMjNocBFYRK9M6p6lmPzb6M7pydTKG74g6MM0SzwtyZ8wFHe6N88NI4S5iThJb_LnBcl5BCn49HMHA4WMheBkywUVmV9c0-ZJfURV1dJW6jUpJqKSCnS0OR7B7dxYclRECZlf6-MMVcM-FORTL9C0u4EFLWfbpGRdNGueh1DlvISF6yJJsJz6iOeOzApXiQ_gTiqLKx3v3cVyKmb",
+    id: 2,
+    title: "Canon EOS R5 Camera",
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD7HtuWaNVfNfn2484Fkukx-ArX3ZRk7om4gGiPZdMwWKDmIgejljz5pMawx6gm4HOLe27zpcR16f1yU0JwUOh9NCUC2cBUrBK4Ldj100Xz5Dhq3e5flbNHbVASfz-iGjOUJiDvV-l8nO_nO2bS7PtdTCCWt7DK01_qU0bBlAWBktPyfaAkOHBJzP1Cvg1R-qQxCHw18MwCJzR3i5aJDWMmdnZzOl6ejIyEngHOdNw16gxRWco0GHtUEdH0fRrka6fpGznScIGgRqHA",
     dates: "Aug 15 - Aug 18",
-    price: 75.00,
+    price: 255.00,
     status: "Pending"
   },
   {
-    id: 2,
+    id: 7,
     title: "Electric Scooter",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC45IZEopj1c7Sv4duCahD6HWeQrrsaeIvRdIxcjyVU883D_aiGdjrHcoYWRzvmbw0OD4WuCN75gblnMUtqRdbdvoWTBO-0t3qkW3nEvKH_0w52q5dGz66j9A1YPq3xVPw6pBEa3iUO0YyVhGsjlVq5AeeURlHtFCDjy6hsIWL1I2Tq0ra1FBv0gfXwvYYyrAUnKPJZ9DrRU79AlIgsF9-k69q22kUGhwvCNHt1tqXwtl8Kn_lfQVg_tZW2MJZMApUdYRECGBI45z6D",
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBBbKb3ng9vIDUM2mSg48XLV_JFMRAQa_T-QbYjbNzv65eplHNGbPDvkEgJ9_CWoMjNocBFYRK9M6p6lmPzb6M7pydTKG74g6MM0SzwtyZ8wFHe6N88NI4S5iThJb_LnBcl5BCn49HMHA4WMheBkywUVmV9c0-ZJfURV1dJW6jUpJqKSCnS0OR7B7dxYclRECZlf6-MMVcM-FORTL9C0u4EFLWfbpGRdNGueh1DlvISF6yJJsJz6iOeOzApXiQ_gTiqLKx3v3cVyKmb",
     dates: "Aug 20 - Aug 25",
     price: 100.00,
     status: "Confirmed"
@@ -25,8 +25,8 @@ const mockRentals = [
 
 const mockMyItems = [
   {
-    id: 3,
-    title: "DJI Mavic Drone",
+    id: 1,
+    title: "DJI Mavic Air 2 Drone",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBZpj8HtyK9pq__-wmGk05EZcjZbdjQqwCu2sF3taUmKcGEikZGzfmbXvGm1hXp5ttZEDg8majwXuJTnymQV9CeWLMxR8CI3x0bCsQx5UAg4rvPafNr9RZypAhwh5sWt-t-p-G5CQoW5sYyhSTBmO713hWW_B3rO2MbOJbhBOUqG6JC4y7GfRWOt9PTPMqtBMTQ9tK-VNXh3dmumHbhioy2WQdspE6GiNSx-FxXkwx7OormlVA9IW06qSS2Qf7B6NsRDI_KRn_5kCRN",
     price: 45,
     status: "Active",
@@ -303,9 +303,11 @@ export default function Dashboard() {
                     </p>
                   </div>
                   <div className="flex gap-2">
-                    <button className="flex-1 py-2 px-4 bg-primary text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
-                      View Details
-                    </button>
+                    <Link to={`/item/${rental.id}`} className="flex-1">
+                      <button className="w-full py-2 px-4 bg-primary text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
+                        View Details
+                      </button>
+                    </Link>
                     <Link to="/messages">
                       <button className="flex items-center justify-center p-2 border border-secondary-light dark:border-secondary-dark rounded-lg hover:bg-secondary-light dark:hover:bg-gray-800 transition-colors">
                         <span className="material-symbols-outlined text-text-light dark:text-text-dark">chat</span>
@@ -346,9 +348,11 @@ export default function Dashboard() {
                     </p>
                   </div>
                   <div className="flex gap-2">
-                    <button className="flex-1 py-2 px-4 bg-primary text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
-                      Edit
-                    </button>
+                    <Link to={`/item/${item.id}`} className="flex-1">
+                      <button className="w-full py-2 px-4 bg-primary text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
+                        Edit
+                      </button>
+                    </Link>
                     <button className="flex-1 py-2 px-4 border border-secondary-light dark:border-secondary-dark rounded-lg text-sm font-medium text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-gray-800 transition-colors">
                       View Stats
                     </button>

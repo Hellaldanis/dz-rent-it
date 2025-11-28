@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
+import { useFavorites } from '../context/FavoritesContext';
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 
 export default function Header({ showAddButton = false, hideSearch = false }) {
   const { user, isAuthenticated, logout } = useAuth();
   const { language, toggleLanguage, t } = useLanguage();
   const { isDark, toggleTheme } = useTheme();
+  const { favoritesCount } = useFavorites();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showDashboardMenu, setShowDashboardMenu] = useState(false);
   const dropdownRef = useRef(null);
@@ -106,6 +108,20 @@ export default function Header({ showAddButton = false, hideSearch = false }) {
                   <span>{t('addNewItem')}</span>
                 </Link>
               )}
+              
+              {/* Favorites Button */}
+              <Link
+                to="/favorites"
+                className="relative flex items-center justify-center rounded-full h-10 w-10 bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+                title="Favorites"
+              >
+                <span className="material-symbols-outlined">favorite</span>
+                {favoritesCount > 0 && (
+                  <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] bg-red-500 text-white text-[10px] font-bold rounded-full px-1">
+                    {favoritesCount > 9 ? '9+' : favoritesCount}
+                  </span>
+                )}
+              </Link>
               
               <div className="relative" ref={dashboardMenuRef}>
                 <button
