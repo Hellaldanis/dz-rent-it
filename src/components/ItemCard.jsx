@@ -4,11 +4,14 @@ export default function ItemCard({ item }) {
   return (
     <Link 
       to={`/item/${item.id}`}
-      className="group flex flex-col gap-3 overflow-hidden rounded-xl bg-background-light dark:bg-secondary-dark shadow-sm transition-all hover:shadow-xl"
+      className="group flex flex-col gap-3 overflow-hidden rounded-xl bg-background-light dark:bg-secondary-dark shadow-sm transition-all hover:shadow-xl will-change-auto"
     >
-      <div 
-        className="w-full bg-center bg-no-repeat aspect-video bg-cover" 
-        style={{ backgroundImage: `url("${item.image}")` }}
+      <img
+        src={item.image}
+        alt={item.title}
+        loading="lazy"
+        decoding="async"
+        className="w-full aspect-video object-cover"
       />
       <div className="p-4 pt-0">
         <p className="text-text-light dark:text-text-dark text-base font-bold leading-normal truncate">

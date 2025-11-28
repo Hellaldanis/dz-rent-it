@@ -148,8 +148,14 @@ export default function Catalog() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredItems.map(item => (
-                <ItemCard key={item.id} item={item} />
+              {filteredItems.map((item, index) => (
+                <div 
+                  key={item.id}
+                  className="animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <ItemCard item={item} />
+                </div>
               ))}
             </div>
           </div>

@@ -38,7 +38,7 @@ export default function Home() {
             <img 
               src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=1200&auto=format&fit=crop&q=80" 
               alt="Community sharing" 
-              className="w-full h-full object-cover opacity-10 dark:opacity-5"
+              className="w-full h-full object-cover opacity-10 dark:opacity-20"
             />
           </div>
           
@@ -61,8 +61,14 @@ export default function Home() {
             {t('recentlyAdded')}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {mockItems.map(item => (
-              <ItemCard key={item.id} item={item} />
+            {mockItems.map((item, index) => (
+              <div 
+                key={item.id}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <ItemCard item={item} />
+              </div>
             ))}
           </div>
         </section>
@@ -73,11 +79,12 @@ export default function Home() {
             {t('browseByCategory')}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {['electronics', 'vehicles', 'tools', 'sports', 'photography', 'music', 'gaming', 'other'].map((category) => (
+            {['electronics', 'vehicles', 'tools', 'sports', 'photography', 'music', 'gaming', 'other'].map((category, index) => (
               <Link
                 key={category}
                 to={`/catalog?category=${category}`}
-                className="flex items-center justify-center h-24 rounded-xl bg-secondary-light dark:bg-secondary-dark cursor-pointer transition-all hover:shadow-lg hover:scale-105"
+                className="flex items-center justify-center h-24 rounded-xl bg-secondary-light dark:bg-secondary-dark cursor-pointer transition-all hover:shadow-lg hover:scale-105 animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.08}s` }}
               >
                 <span className="text-text-light dark:text-text-dark font-semibold">{t(category)}</span>
               </Link>

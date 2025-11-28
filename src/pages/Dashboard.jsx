@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -42,10 +42,47 @@ const mockMyItems = [
   }
 ];
 
+const mockNotifications = [
+  {
+    id: 1,
+    type: 'message',
+    title: 'New message from Ahmed K.',
+    description: 'Sent you a message about Canon EOS R5 Camera',
+    time: '5 min ago',
+    read: false
+  },
+  {
+    id: 2,
+    type: 'booking',
+    title: 'Booking confirmed!',
+    description: 'Your rental for DJI Mavic Drone has been confirmed',
+    time: '2 hours ago',
+    read: false
+  },
+  {
+    id: 3,
+    type: 'review',
+    title: 'New review received',
+    description: 'Karim L. left a 5-star review on your Gaming Console',
+    time: '1 day ago',
+    read: true
+  },
+  {
+    id: 4,
+    type: 'payment',
+    title: 'Payment received',
+    description: 'You received $75.00 for Pro DSLR Camera rental',
+    time: '2 days ago',
+    read: true
+  }
+];
+
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('rentals');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [notifications, setNotifications] = useState(mockNotifications);
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,6 +92,40 @@ export default function Dashboard() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const unreadCount = notifications.filter(n => !n.read).length;
+
+  const markAsRead = (id) => {
+    setNotifications(notifications.map(n => 
+      n.id === id ? { ...n, read: true } : n
+    ));
+  };
+
+  const handleNotificationClick = (notif) => {
+    markAsRead(notif.id);
+    
+    // Redirect based on notification type
+    if (notif.type === 'message') {
+      navigate('/messages');
+    } else if (notif.type === 'booking') {
+      setActiveTab('rentals');
+    } else if (notif.type === 'review') {
+      setActiveTab('items');
+    } else if (notif.type === 'payment') {
+      navigate('/payments');
+    }
+    // For payment, stay on notifications
+  };
+
+  const getNotificationIcon = (type) => {
+    switch (type) {
+      case 'message': return 'chat';
+      case 'booking': return 'event_available';
+      case 'review': return 'star';
+      case 'payment': return 'payments';
+      default: return 'notifications';
+    }
+  };
 
   const getStatusColor = (status) => {
     const statusMap = {
@@ -127,6 +198,22 @@ export default function Dashboard() {
                 {mockMyItems.length}
               </span>
             </button>
+            <button
+              onClick={() => setActiveTab('notifications')}
+              className={`relative flex items-center justify-center border-b-[3px] pb-3 pt-2 gap-2 transition-colors ${
+                activeTab === 'notifications'
+                  ? 'border-b-primary text-text-light dark:text-text-dark'
+                  : 'border-b-transparent text-text-muted-light dark:text-text-muted-dark'
+              }`}
+            >
+              <span className="material-symbols-outlined text-lg">notifications</span>
+              <p className="text-sm font-bold">Notifications</p>
+              {unreadCount > 0 && (
+                <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-white text-[10px] font-bold">
+                  {unreadCount}
+                </span>
+              )}
+            </button>
           </div>
         </div>
 
@@ -166,15 +253,17 @@ export default function Dashboard() {
                     <button className="flex-1 py-2 px-4 bg-primary text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
                       View Details
                     </button>
-                    <button className="flex items-center justify-center p-2 border border-secondary-light dark:border-secondary-dark rounded-lg hover:bg-secondary-light dark:hover:bg-gray-800 transition-colors">
-                      <span className="material-symbols-outlined text-text-light dark:text-text-dark">chat</span>
-                    </button>
+                    <Link to="/messages">
+                      <button className="flex items-center justify-center p-2 border border-secondary-light dark:border-secondary-dark rounded-lg hover:bg-secondary-light dark:hover:bg-gray-800 transition-colors">
+                        <span className="material-symbols-outlined text-text-light dark:text-text-dark">chat</span>
+                      </button>
+                    </Link>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        ) : (
+        ) : activeTab === 'items' ? (
           <div>
             <h2 className="text-text-light dark:text-text-dark text-[22px] font-bold mb-4">
               My Listed Items
@@ -210,6 +299,57 @@ export default function Dashboard() {
                     <button className="flex-1 py-2 px-4 border border-secondary-light dark:border-secondary-dark rounded-lg text-sm font-medium text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-gray-800 transition-colors">
                       View Stats
                     </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <h2 className="text-text-light dark:text-text-dark text-[22px] font-bold mb-4">
+              Notifications
+            </h2>
+            <div className="space-y-3">
+              {notifications.map((notif) => (
+                <div
+                  key={notif.id}
+                  onClick={() => handleNotificationClick(notif)}
+                  className={`flex gap-4 p-4 rounded-xl cursor-pointer transition-all hover:shadow-md ${
+                    notif.read 
+                      ? 'bg-background-light dark:bg-secondary-dark' 
+                      : 'bg-blue-50 dark:bg-blue-900/20 border-l-4 border-primary'
+                  }`}
+                >
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
+                    notif.type === 'message' ? 'bg-blue-100 dark:bg-blue-900/40' :
+                    notif.type === 'booking' ? 'bg-green-100 dark:bg-green-900/40' :
+                    notif.type === 'review' ? 'bg-yellow-100 dark:bg-yellow-900/40' :
+                    'bg-purple-100 dark:bg-purple-900/40'
+                  }`}>
+                    <span className={`material-symbols-outlined ${
+                      notif.type === 'message' ? 'text-blue-600 dark:text-blue-400' :
+                      notif.type === 'booking' ? 'text-green-600 dark:text-green-400' :
+                      notif.type === 'review' ? 'text-yellow-600 dark:text-yellow-400' :
+                      'text-purple-600 dark:text-purple-400'
+                    }`}>
+                      {getNotificationIcon(notif.type)}
+                    </span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-text-light dark:text-text-dark font-semibold">
+                        {notif.title}
+                      </p>
+                      {!notif.read && (
+                        <span className="w-2 h-2 bg-primary rounded-full flex-shrink-0 mt-2"></span>
+                      )}
+                    </div>
+                    <p className="text-text-muted-light dark:text-text-muted-dark text-sm mt-1">
+                      {notif.description}
+                    </p>
+                    <p className="text-text-muted-light dark:text-text-muted-dark text-xs mt-2">
+                      {notif.time}
+                    </p>
                   </div>
                 </div>
               ))}

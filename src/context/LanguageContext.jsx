@@ -135,7 +135,76 @@ const translations = {
     contactSupport: 'Contact Support',
     followUs: 'Follow Us',
     allRightsReserved: 'All rights reserved.',
-    madeWithLove: 'Made with ❤️ in Algeria'
+    madeWithLove: 'Made with ❤️ in Algeria',
+    
+    // Payments
+    payments: 'Payments',
+    manageTransactions: 'Manage your transactions and payment history',
+    backToDashboard: 'Back to Dashboard',
+    received: 'Received',
+    sent: 'Sent',
+    totalEarnings: 'Total earnings',
+    totalSpent: 'Total spent',
+    awaitingProcessing: 'Awaiting processing',
+    allTransactions: 'All Transactions',
+    paymentMethods: 'Payment Methods',
+    noTransactionsFound: 'No transactions found',
+    transactionHistory: 'Your payment history will appear here',
+    paymentFrom: 'Payment from',
+    paymentTo: 'Payment to',
+    pendingFrom: 'Pending from',
+    viewReceipt: 'View Receipt',
+    transactionId: 'Transaction ID',
+    
+    // Messages
+    messages: 'Messages',
+    search: 'Search',
+    searchConversations: 'Search conversations...',
+    typeMessage: 'Type a message...',
+    noConversationsYet: 'No conversations yet',
+    startChatting: 'Start chatting with item owners or renters',
+    selectConversation: 'Select a conversation',
+    chooseConversation: 'Choose a conversation from the list to start chatting',
+    
+    // Dashboard
+    notifications: 'Notifications',
+    items: 'Items',
+    rentals: 'Rentals',
+    markAllAsRead: 'Mark all as read',
+    noNotifications: 'No notifications',
+    allCaughtUp: 'You are all caught up!',
+    quickAccess: 'Quick Access',
+    viewRentalsItems: 'View your rentals & items',
+    chatWithUsers: 'Chat with owners & renters',
+    publishItem: 'Publish Item',
+    listNewRental: 'List a new rental item',
+    settings: 'Settings',
+    accountPreferences: 'Account & preferences',
+    
+    // Item Detail
+    availability: 'Availability',
+    available: 'Available',
+    unavailable: 'Unavailable',
+    owner: 'Owner',
+    rentNow: 'Rent Now',
+    sendMessage: 'Send Message',
+    reviews: 'Reviews',
+    noReviewsYet: 'No reviews yet',
+    firstToReview: 'Be the first to review this item',
+    similarItems: 'Similar Items',
+    
+    // Public Profile
+    itemsListed: 'Items Listed',
+    rating: 'Rating',
+    memberSince: 'Member Since',
+    viewAllItems: 'View All Items',
+    ownerReviews: 'Owner Reviews',
+    writeReview: 'Write a Review',
+    yourReview: 'Your Review',
+    submitReview: 'Submit Review',
+    helpful: 'Helpful',
+    professional: 'Professional',
+    responsive: 'Responsive'
   },
   ar: {
     // Header
@@ -261,7 +330,76 @@ const translations = {
     contactSupport: 'اتصل بالدعم',
     followUs: 'تابعنا',
     allRightsReserved: 'جميع الحقوق محفوظة.',
-    madeWithLove: 'صنع بـ ❤️ في الجزائر'
+    madeWithLove: 'صنع بـ ❤️ في الجزائر',
+    
+    // Payments
+    payments: 'المدفوعات',
+    manageTransactions: 'إدارة معاملاتك وسجل الدفع',
+    backToDashboard: 'العودة إلى لوحة التحكم',
+    received: 'مستلم',
+    sent: 'مرسل',
+    totalEarnings: 'إجمالي الأرباح',
+    totalSpent: 'إجمالي المصروفات',
+    awaitingProcessing: 'في انتظار المعالجة',
+    allTransactions: 'جميع المعاملات',
+    paymentMethods: 'طرق الدفع',
+    noTransactionsFound: 'لم يتم العثور على معاملات',
+    transactionHistory: 'سيظهر سجل الدفع الخاص بك هنا',
+    paymentFrom: 'دفعة من',
+    paymentTo: 'دفعة إلى',
+    pendingFrom: 'معلق من',
+    viewReceipt: 'عرض الإيصال',
+    transactionId: 'رقم المعاملة',
+    
+    // Messages
+    messages: 'الرسائل',
+    search: 'بحث',
+    searchConversations: 'البحث في المحادثات...',
+    typeMessage: 'اكتب رسالة...',
+    noConversationsYet: 'لا توجد محادثات بعد',
+    startChatting: 'ابدأ الدردشة مع أصحاب العناصر أو المستأجرين',
+    selectConversation: 'اختر محادثة',
+    chooseConversation: 'اختر محادثة من القائمة لبدء الدردشة',
+    
+    // Dashboard
+    notifications: 'الإشعارات',
+    items: 'العناصر',
+    rentals: 'الإيجارات',
+    markAllAsRead: 'وضع علامة مقروء على الكل',
+    noNotifications: 'لا توجد إشعارات',
+    allCaughtUp: 'أنت على اطلاع بكل شيء!',
+    quickAccess: 'وصول سريع',
+    viewRentalsItems: 'عرض إيجاراتك وعناصرك',
+    chatWithUsers: 'الدردشة مع الملاك والمستأجرين',
+    publishItem: 'نشر عنصر',
+    listNewRental: 'إدراج عنصر إيجار جديد',
+    settings: 'الإعدادات',
+    accountPreferences: 'الحساب والتفضيلات',
+    
+    // Item Detail
+    availability: 'التوفر',
+    available: 'متاح',
+    unavailable: 'غير متاح',
+    owner: 'المالك',
+    rentNow: 'استأجر الآن',
+    sendMessage: 'إرسال رسالة',
+    reviews: 'التقييمات',
+    noReviewsYet: 'لا توجد تقييمات بعد',
+    firstToReview: 'كن أول من يقيم هذا العنصر',
+    similarItems: 'عناصر مشابهة',
+    
+    // Public Profile
+    itemsListed: 'العناصر المدرجة',
+    rating: 'التقييم',
+    memberSince: 'عضو منذ',
+    viewAllItems: 'عرض جميع العناصر',
+    ownerReviews: 'تقييمات المالك',
+    writeReview: 'كتابة تقييم',
+    yourReview: 'تقييمك',
+    submitReview: 'إرسال التقييم',
+    helpful: 'متعاون',
+    professional: 'محترف',
+    responsive: 'سريع الاستجابة'
   }
 };
 

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import ItemDetail from './pages/ItemDetail';
@@ -10,12 +11,23 @@ import Publish from './pages/Publish';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import PublicProfile from './pages/PublicProfile';
+import About from './pages/About';
+import HowItWorks from './pages/HowItWorks';
+import Terms from './pages/Terms';
+import FAQ from './pages/FAQ';
+import HelpCenter from './pages/HelpCenter';
+import Contact from './pages/Contact';
+import Messages from './pages/Messages';
+import Payments from './pages/Payments';
+import BookingRequest from './pages/BookingRequest';
+import BookingConfirmation from './pages/BookingConfirmation';
 
 function App() {
   return (
-    <LanguageProvider>
-      <AuthProvider>
-        <Router>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <Router>
           <div className="bg-background-light dark:bg-background-dark min-h-screen">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -27,11 +39,22 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/user/:userId" element={<PublicProfile />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/how-it-works" element={<HowItWorks />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/help" element={<HelpCenter />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/messages" element={<Messages />} />
+              <Route path="/payments" element={<Payments />} />
+              <Route path="/booking-request" element={<BookingRequest />} />
+              <Route path="/booking-confirmation" element={<BookingConfirmation />} />
             </Routes>
           </div>
-        </Router>
-      </AuthProvider>
-    </LanguageProvider>
+          </Router>
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 
