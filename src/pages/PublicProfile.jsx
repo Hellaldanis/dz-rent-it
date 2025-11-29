@@ -127,6 +127,34 @@ export default function PublicProfile() {
               <p className="text-text-muted-light dark:text-text-muted-dark mb-4">
                 {user.bio}
               </p>
+
+              {/* User Badges */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {user.rating >= 4.8 && (
+                  <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-medium">
+                    <span className="material-symbols-outlined text-sm">star</span>
+                    <span>5 Stars Host</span>
+                  </div>
+                )}
+                {user.itemsRented >= 10 && (
+                  <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-medium">
+                    <span className="material-symbols-outlined text-sm">trending_up</span>
+                    <span>Top Renter</span>
+                  </div>
+                )}
+                {userItems.length >= 5 && (
+                  <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-medium">
+                    <span className="material-symbols-outlined text-sm">verified</span>
+                    <span>Verified Owner</span>
+                  </div>
+                )}
+                {user.joinDate.includes('2024') && (
+                  <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-xs font-medium">
+                    <span className="material-symbols-outlined text-sm">workspace_premium</span>
+                    <span>Early Adopter</span>
+                  </div>
+                )}
+              </div>
               
               <div className="flex gap-4 text-sm">
                 <div>

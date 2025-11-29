@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext';
@@ -26,6 +27,7 @@ const Payments = lazy(() => import('./pages/Payments'));
 const Favorites = lazy(() => import('./pages/Favorites'));
 const BookingRequest = lazy(() => import('./pages/BookingRequest'));
 const BookingConfirmation = lazy(() => import('./pages/BookingConfirmation'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
   return (
@@ -34,6 +36,22 @@ function App() {
         <AuthProvider>
           <FavoritesProvider>
           <Router>
+            <Toaster 
+              position="top-right"
+              toastOptions={{
+                duration: 3000,
+                style: {
+                  background: 'var(--toast-bg)',
+                  color: 'var(--toast-text)',
+                },
+                success: {
+                  iconTheme: {
+                    primary: '#007AFF',
+                    secondary: '#fff',
+                  },
+                },
+              }}
+            />
             <div className="bg-background-light dark:bg-background-dark min-h-screen">
               <Suspense fallback={
                 <div className="min-h-screen flex items-center justify-center bg-background-light dark:bg-background-dark">
@@ -64,6 +82,7 @@ function App() {
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/booking-request" element={<BookingRequest />} />
                 <Route path="/booking-confirmation" element={<BookingConfirmation />} />
+              <Route path="*" element={<NotFound />} />
               </Routes>
               </Suspense>
             </div>

@@ -22,6 +22,7 @@ export default function BookingRequest() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -29,10 +30,12 @@ export default function BookingRequest() {
     // Redirect if no item data
     if (!item) {
       navigate('/catalog');
+      return;
     }
 
-    // Redirect to login if not authenticated
-    if (!isAuthenticated) {
+    // Redirect to login if not authenticated AND no item data in state
+    // (Si item existe, l'user vient probablement de se connecter)
+    if (!isAuthenticated && !item) {
       navigate('/login', { state: { from: location } });
     }
   }, [item, isAuthenticated, navigate, location]);
@@ -44,14 +47,75 @@ export default function BookingRequest() {
   const grandTotal = (parseFloat(totalPrice) + parseFloat(serviceFee)).toFixed(2);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: '' });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    // Full name validation
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = 'Full name is required';
+    } else if (formData.fullName.trim().length < 2) {
+      newErrors.fullName = 'Name must be at least 2 characters';
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    // Phone validation (Algeria format)
+    const phoneRegex = /^(\+213|0)[5-7][0-9]{8}$/;
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!phoneRegex.test(formData.phone.replace(/\s/g, ''))) {
+      newErrors.phone = 'Please enter a valid Algerian phone number';
+    }
+    
+    // Date validation
+    if (!startDate || !endDate) {
+      newErrors.dates = 'Rental dates are missing';
+    } else {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      if (start < today) {
+        newErrors.dates = 'Start date cannot be in the past';
+      } else if (end <= start) {
+        newErrors.dates = 'End date must be after start date';
+      }
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      // Scroll to first error
+      const firstError = document.querySelector('.text-red-500');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+    
     setLoading(true);
 
     // Simulate API call
@@ -86,6 +150,16 @@ export default function BookingRequest() {
           Complete Your Booking
         </h1>
 
+        {/* Global error message for dates */}
+        {errors.dates && (
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-red-500">error</span>
+              <p className="text-red-600 dark:text-red-400 font-medium">{errors.dates}</p>
+            </div>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Booking Form */}
           <div className="lg:col-span-2">
@@ -107,9 +181,12 @@ export default function BookingRequest() {
                       value={formData.fullName}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 rounded-lg border border-secondary-light dark:border-secondary-dark bg-secondary-light dark:bg-background-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary"
+                      className={`w-full px-4 py-2 rounded-lg border ${errors.fullName ? 'border-red-500' : 'border-secondary-light dark:border-secondary-dark'} bg-secondary-light dark:bg-background-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 ${errors.fullName ? 'focus:ring-red-500' : 'focus:ring-primary'}`}
                       placeholder="John Doe"
                     />
+                    {errors.fullName && (
+                      <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
+                    )}
                   </div>
 
                   <div>
@@ -122,9 +199,12 @@ export default function BookingRequest() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 rounded-lg border border-secondary-light dark:border-secondary-dark bg-secondary-light dark:bg-background-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary"
+                      className={`w-full px-4 py-2 rounded-lg border ${errors.email ? 'border-red-500' : 'border-secondary-light dark:border-secondary-dark'} bg-secondary-light dark:bg-background-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 ${errors.email ? 'focus:ring-red-500' : 'focus:ring-primary'}`}
                       placeholder="john@example.com"
                     />
+                    {errors.email && (
+                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                    )}
                   </div>
 
                   <div>
@@ -137,9 +217,12 @@ export default function BookingRequest() {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 rounded-lg border border-secondary-light dark:border-secondary-dark bg-secondary-light dark:bg-background-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary"
+                      className={`w-full px-4 py-2 rounded-lg border ${errors.phone ? 'border-red-500' : 'border-secondary-light dark:border-secondary-dark'} bg-secondary-light dark:bg-background-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 ${errors.phone ? 'focus:ring-red-500' : 'focus:ring-primary'}`}
                       placeholder="+213 555 123 456"
                     />
+                    {errors.phone && (
+                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                    )}
                   </div>
 
                   <div>

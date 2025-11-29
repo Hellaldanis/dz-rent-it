@@ -400,6 +400,396 @@ const translations = {
     helpful: 'متعاون',
     professional: 'محترف',
     responsive: 'سريع الاستجابة'
+  },
+  kab: {
+    // Header - Amazigh Latin
+    searchPlaceholder: 'Nadi ɣef wayen tebɣiḍ',
+    login: 'Kcem',
+    signup: 'Jerred',
+    dashboard: 'Tafelwit n usenqed',
+    profile: 'Amaɣnu-inu',
+    logout: 'Ffeɣ',
+    home: 'Agejdan',
+    categories: 'Taggayin',
+    contactUs: 'Nermes-aɣ',
+    
+    // Home
+    heroTitle: 'Ssuɣer kra, melmi tebɣiḍ',
+    heroSubtitle: 'Af-d akk n teɣawsiwin i yezmer ad tessuɣreḍ seg yimdanen n temɣiwent-inek.',
+    recentlyAdded: 'Yernin melmi kan',
+    browseByCategory: 'Snirem s taggayin',
+    perDay: 's wass',
+    
+    // Dashboard
+    myDashboard: 'Tafelwit-inu n usenqed',
+    addNewItem: 'Rnu afaris amaynu',
+    myRentals: 'Isuɣra-inu',
+    myItems: 'Tiɣawsiwin-inu',
+    pending: 'Yettrajju',
+    confirmed: 'Yettwasentem',
+    completed: 'Yekfa',
+    canceled: 'Yettwasefsex',
+    active: 'Yermid',
+    bookings: 'isiɣren',
+    
+    // Profile
+    myProfile: 'Amaɣnu-inu',
+    manageAccount: 'Sefrek iɣewwaṛen n umiḍan-ik d usmenyif',
+    profileInfo: 'Talɣut n umaɣnu',
+    security: 'Taɣellist',
+    edit: 'Ẓreg',
+    saveChanges: 'Ḥrez ibeddilen',
+    cancel: 'Sefsex',
+    fullName: 'Isem ummid',
+    email: 'Imayl',
+    phoneNumber: 'Uṭṭun n tiliɣri',
+    dateOfBirth: 'Azemz n tlalit',
+    city: 'Tamdint',
+    address: 'Tansa',
+    changePassword: 'Beddel awal uffir',
+    currentPassword: 'Awal uffir n tura',
+    newPassword: 'Awal uffir amaynu',
+    confirmNewPassword: 'Sentem awal uffir amaynu',
+    updatePassword: 'Leqqem awal uffir',
+    
+    // Login
+    welcomeBack: 'Ansuf yis-k i tuɣalin',
+    forgotPassword: 'Tettuḍ awal uffir?',
+    or: 'neɣ',
+    continueWithGoogle: 'Kemmel s Google',
+    dontHaveAccount: 'Ur tesɛiḍ ara amiḍan?',
+    createAccount: 'Rnu amiḍan',
+    
+    // SignUp
+    createYourAccount: 'Rnu amiḍan-ik',
+    joinMessage: 'Ddu ɣer DZ-RentIt u bdu ad tessuɣreḍ ass-a',
+    password: 'Awal uffir',
+    confirmPassword: 'Sentem awal uffir',
+    iAgree: 'Qebleɣ',
+    termsOfService: 'Tiwtilin n umeẓlu',
+    and: 'd',
+    privacyPolicy: 'Tasertit n tbaḍnit',
+    alreadyHaveAccount: 'Tesɛiḍ yakan amiḍan?',
+    passwordsDontMatch: 'Awalen uffiren ur mṣadan ara',
+    accountCreated: 'Amiḍan yettwarna!',
+    selectCity: 'Fren tamdint-ik',
+    
+    // Publish
+    listYourItem: 'Bḍu afaris-ik i usuɣur',
+    itemDetails: 'Talɣut n ufaris',
+    title: 'Azwel',
+    whatAreYouRenting: 'D acu i tessuɣreḍ?',
+    description: 'Aglam',
+    describeYourItem: 'Glem afaris-ik, addad-is, d wayen yellan deg-s...',
+    category: 'Taggayt',
+    selectCategory: 'Fren taggayt',
+    electronics: 'Tiliksas',
+    photography: 'Tasukkent',
+    gaming: 'Uraren',
+    sports: 'Addal',
+    music: 'Aẓawan',
+    tools: 'Ifecka',
+    vehicles: 'Tkerrusin',
+    other: 'Nniḍen',
+    pricing: 'Ssuma',
+    dailyRate: 'Ssuma n wass (DZD)',
+    location: 'Adig',
+    
+    // Cities
+    algiers: 'Lezzayer',
+    oran: 'Wehran',
+    constantine: 'Qsentina',
+    annaba: 'Ɛennaba',
+    blida: 'Leblida',
+    batna: 'Tbatent',
+    setif: 'Sṭif',
+    sidibelabbes: 'Sidi Bel-Ɛebbes',
+    biskra: 'Biskra',
+    tebessa: 'Tbessa',
+    tlemcen: 'Tlemsen',
+    bejaia: 'Bgayet',
+    tiaret: 'Tiaret',
+    bordjbouarreridj: 'Bordj Bu-Ɛerridj',
+    djelfa: 'Jelfa',
+    mostaganem: 'Mustaghanem',
+    
+    // Footer
+    aboutUs: 'Ɣef-nneɣ',
+    aboutDescription: 'DZ-RentIt d talɣubliṭ tameqqrant n usuɣur deg Lezzayer, tessedukul imdanen yellan ɣur-sen tiɣawsiwin akked wid yebɣan ad tent-sssuɣren.',
+    quickLinks: 'Iseɣwan uraren',
+    howItWorks: 'Amek iteddu',
+    termsConditions: 'Tiwtilin d tnaffutin',
+    support: 'Tallalt',
+    faq: 'Isteqsiyen',
+    helpCenter: 'Ammas n tallalt',
+    contactSupport: 'Nermes tallalt',
+    followUs: 'Ḍfer-aɣ',
+    allRightsReserved: 'Izerfan meṛṛa ttwḥerzen.',
+    madeWithLove: 'Yettwag s ❤️ deg Lezzayer',
+    
+    // Payments
+    payments: 'Lexlaṣat',
+    manageTransactions: 'Sefrek tinawayin-ik d umezruy n lexlaṣ',
+    backToDashboard: 'Uɣal ɣer tfelwit n usenqed',
+    received: 'Yettwarem',
+    sent: 'Yettwazen',
+    totalEarnings: 'Asmekti n tqaɛin',
+    totalSpent: 'Asmekti n usaraf',
+    awaitingProcessing: 'Yettrajju asesfer',
+    allTransactions: 'Akk tinawayin',
+    paymentMethods: 'Tarrayin n lexlaṣ',
+    noTransactionsFound: 'Ulac tinawayin',
+    transactionHistory: 'Amezruy n lexlaṣat-ik ad d-iban dagi',
+    paymentFrom: 'Lexlaṣ seg',
+    paymentTo: 'Lexlaṣ ɣer',
+    pendingFrom: 'Yettrajju seg',
+    viewReceipt: 'Wali afecku',
+    transactionId: 'Uṭṭun n tnawayt',
+    
+    // Messages
+    messages: 'Iznan',
+    search: 'Nadi',
+    searchConversations: 'Nadi deg idiwenniyen...',
+    typeMessage: 'Aru izen...',
+    noConversationsYet: 'Ulac idiwenniyen ar tura',
+    startChatting: 'Bdu adiwenni akked yimawlan n teɣawsiwin neɣ iseɣren',
+    selectConversation: 'Fren adiwenni',
+    chooseConversation: 'Fren adiwenni seg tebdart i wakken ad tebduḍ',
+    
+    // Dashboard
+    notifications: 'Ilɣa',
+    items: 'Tiɣawsiwin',
+    rentals: 'Isuɣra',
+    markAllAsRead: 'Creḍ meṛṛa d iɣran',
+    noNotifications: 'Ulac ilɣa',
+    allCaughtUp: 'Teẓriḍ kullec!',
+    quickAccess: 'Anekcum arurad',
+    viewRentalsItems: 'Wali isuɣra-k d teɣawsiwin-ik',
+    chatWithUsers: 'Mmeslay akked yimawlan d iseɣren',
+    publishItem: 'Bḍu afaris',
+    listNewRental: 'Bḍu afaris amaynu n usuɣur',
+    settings: 'Iɣewwaṛen',
+    accountPreferences: 'Amiḍan d usmenyif',
+    
+    // Item Detail
+    availability: 'Tiwizi',
+    available: 'Yellan',
+    unavailable: 'Ulac-it',
+    owner: 'Bab',
+    rentNow: 'Ssuɣer tura',
+    sendMessage: 'Azen izen',
+    reviews: 'Tikturin',
+    noReviewsYet: 'Ulac tikturin ar tura',
+    firstToReview: 'Ili d amezwaru ara d-yefken tikti',
+    similarItems: 'Tiɣawsiwin icudden',
+    
+    // Public Profile
+    itemsListed: 'Tiɣawsiwin yettwabḍan',
+    rating: 'Takturt',
+    memberSince: 'Aɛeggal seg',
+    viewAllItems: 'Wali akk tiɣawsiwin',
+    ownerReviews: 'Tikturin n umawlan',
+    writeReview: 'Aru takturt',
+    yourReview: 'Takturt-ik',
+    submitReview: 'Azen takturt',
+    helpful: 'Yettɛiwen',
+    professional: 'Asnawan',
+    responsive: 'Yettɛawan s tɛeggelt'
+  },
+  kab_tfng: {
+    // Header - Amazigh Tifinagh
+    searchPlaceholder: 'ⵏⴰⴷⵉ ⵖⴼ ⵡⴰⵢⴻⵏ ⵜⴻⴱⵖⵉⴹ',
+    login: 'ⴽⵛⴻⵎ',
+    signup: 'ⵊⴻⵔⵔⴻⴷ',
+    dashboard: 'ⵜⴰⴼⴻⵍⵡⵉⵜ ⵏ ⵓⵙⴻⵏⵇⴻⴷ',
+    profile: 'ⴰⵎⴰⵖⵏⵓ-ⵉⵏⵓ',
+    logout: 'ⴼⴼⴻⵖ',
+    home: 'ⴰⴳⴻⵊⴷⴰⵏ',
+    categories: 'ⵜⴰⴳⴳⴰⵢⵉⵏ',
+    contactUs: 'ⵏⴻⵔⵎⴻⵙ-ⴰⵖ',
+    
+    // Home
+    heroTitle: 'ⵙⵙⵓⵖⴻⵔ ⴽⵔⴰ, ⵎⴻⵍⵎⵉ ⵜⴻⴱⵖⵉⴹ',
+    heroSubtitle: 'ⴰⴼ-ⴷ ⴰⴽⴽ ⵏ ⵜⴻⵖⴰⵡⵙⵉⵡⵉⵏ ⵉ ⵢⴻⵣⵎⴻⵔ ⴰⴷ ⵜⴻⵙⵙⵓⵖⵔⴻⴹ ⵙⴻⴳ ⵢⵉⵎⴷⴰⵏⴻⵏ ⵏ ⵜⴻⵎⵖⵉⵡⴻⵏⵜ-ⵉⵏⴻⴽ.',
+    recentlyAdded: 'ⵢⴻⵔⵏⵉⵏ ⵎⴻⵍⵎⵉ ⴽⴰⵏ',
+    browseByCategory: 'ⵙⵏⵉⵔⴻⵎ ⵙ ⵜⴰⴳⴳⴰⵢⵉⵏ',
+    perDay: 'ⵙ ⵡⴰⵙⵙ',
+    
+    // Dashboard
+    myDashboard: 'ⵜⴰⴼⴻⵍⵡⵉⵜ-ⵉⵏⵓ ⵏ ⵓⵙⴻⵏⵇⴻⴷ',
+    addNewItem: 'ⵔⵏⵓ ⴰⴼⴰⵔⵉⵙ ⴰⵎⴰⵢⵏⵓ',
+    myRentals: 'ⵉⵙⵓⵖⵔⴰ-ⵉⵏⵓ',
+    myItems: 'ⵜⵉⵖⴰⵡⵙⵉⵡⵉⵏ-ⵉⵏⵓ',
+    pending: 'ⵢⴻⵜⵜⵔⴰⵊⵊⵓ',
+    confirmed: 'ⵢⴻⵜⵜⵡⴰⵙⴻⵏⵜⴻⵎ',
+    completed: 'ⵢⴻⴽⴼⴰ',
+    canceled: 'ⵢⴻⵜⵜⵡⴰⵙⴻⴼⵙⴻⵅ',
+    active: 'ⵢⴻⵔⵎⵉⴷ',
+    bookings: 'ⵉⵙⵉⵖⵔⴻⵏ',
+    
+    // Profile
+    myProfile: 'ⴰⵎⴰⵖⵏⵓ-ⵉⵏⵓ',
+    manageAccount: 'ⵙⴻⴼⵔⴻⴽ ⵉⵖⴻⵡⵡⴰⵕⴻⵏ ⵏ ⵓⵎⵉⴹⴰⵏ-ⵉⴽ ⴷ ⵓⵙⵎⴻⵏⵢⵉⴼ',
+    profileInfo: 'ⵜⴰⵍⵖⵓⵜ ⵏ ⵓⵎⴰⵖⵏⵓ',
+    security: 'ⵜⴰⵖⴻⵍⵍⵉⵙⵜ',
+    edit: 'ⵥⵔⴻⴳ',
+    saveChanges: 'ⵃⵔⴻⵣ ⵉⴱⴻⴷⴷⵉⵍⴻⵏ',
+    cancel: 'ⵙⴻⴼⵙⴻⵅ',
+    fullName: 'ⵉⵙⴻⵎ ⵓⵎⵎⵉⴷ',
+    email: 'ⵉⵎⴰⵢⵍ',
+    phoneNumber: 'ⵓⵟⵟⵓⵏ ⵏ ⵜⵉⵍⵉⵖⵔⵉ',
+    dateOfBirth: 'ⴰⵣⴻⵎⵣ ⵏ ⵜⵍⴰⵍⵉⵜ',
+    city: 'ⵜⴰⵎⴷⵉⵏⵜ',
+    address: 'ⵜⴰⵏⵙⴰ',
+    changePassword: 'ⴱⴻⴷⴷⴻⵍ ⴰⵡⴰⵍ ⵓⴼⵉⵔ',
+    currentPassword: 'ⴰⵡⴰⵍ ⵓⴼⵉⵔ ⵏ ⵜⵓⵔⴰ',
+    newPassword: 'ⴰⵡⴰⵍ ⵓⴼⵉⵔ ⴰⵎⴰⵢⵏⵓ',
+    confirmNewPassword: 'ⵙⴻⵏⵜⴻⵎ ⴰⵡⴰⵍ ⵓⴼⵉⵔ ⴰⵎⴰⵢⵏⵓ',
+    updatePassword: 'ⵍⴻⵇⵇⴻⵎ ⴰⵡⴰⵍ ⵓⴼⵉⵔ',
+    
+    // Login
+    welcomeBack: 'ⴰⵏⵙⵓⴼ ⵢⵉⵙ-ⴽ ⵉ ⵜⵓⵖⴰⵍⵉⵏ',
+    forgotPassword: 'ⵜⴻⵜⵜⵓⴹ ⴰⵡⴰⵍ ⵓⴼⵉⵔ?',
+    or: 'ⵏⴻⵖ',
+    continueWithGoogle: 'ⴽⴻⵎⵎⴻⵍ ⵙ Google',
+    dontHaveAccount: 'ⵓⵔ ⵜⴻⵙⵄⵉⴹ ⴰⵔⴰ ⴰⵎⵉⴹⴰⵏ?',
+    createAccount: 'ⵔⵏⵓ ⴰⵎⵉⴹⴰⵏ',
+    
+    // SignUp
+    createYourAccount: 'ⵔⵏⵓ ⴰⵎⵉⴹⴰⵏ-ⵉⴽ',
+    joinMessage: 'ⴷⴷⵓ ⵖⴻⵔ DZ-RentIt ⵓ ⴱⴷⵓ ⴰⴷ ⵜⴻⵙⵙⵓⵖⵔⴻⴹ ⴰⵙⵙ-ⴰ',
+    password: 'ⴰⵡⴰⵍ ⵓⴼⵉⵔ',
+    confirmPassword: 'ⵙⴻⵏⵜⴻⵎ ⴰⵡⴰⵍ ⵓⴼⵉⵔ',
+    iAgree: 'ⵇⴻⴱⵍⴻⵖ',
+    termsOfService: 'ⵜⵉⵡⵜⵉⵍⵉⵏ ⵏ ⵓⵎⴻⵥⵍⵓ',
+    and: 'ⴷ',
+    privacyPolicy: 'ⵜⴰⵙⴻⵔⵜⵉⵜ ⵏ ⵜⴱⴰⴹⵏⵉⵜ',
+    alreadyHaveAccount: 'ⵜⴻⵙⵄⵉⴹ ⵢⴰⴽⴰⵏ ⴰⵎⵉⴹⴰⵏ?',
+    passwordsDontMatch: 'ⴰⵡⴰⵍⴻⵏ ⵓⴼⵉⵔⴻⵏ ⵓⵔ ⵎⵚⴰⴷⴰⵏ ⴰⵔⴰ',
+    accountCreated: 'ⴰⵎⵉⴹⴰⵏ ⵢⴻⵜⵜⵡⴰⵔⵏⴰ!',
+    selectCity: 'ⴼⵔⴻⵏ ⵜⴰⵎⴷⵉⵏⵜ-ⵉⴽ',
+    
+    // Publish
+    listYourItem: 'ⴱⴹⵓ ⴰⴼⴰⵔⵉⵙ-ⵉⴽ ⵉ ⵓⵙⵓⵖⵓⵔ',
+    itemDetails: 'ⵜⴰⵍⵖⵓⵜ ⵏ ⵓⴼⴰⵔⵉⵙ',
+    title: 'ⴰⵣⵡⴻⵍ',
+    whatAreYouRenting: 'ⴷ ⴰⵛⵓ ⵉ ⵜⴻⵙⵙⵓⵖⵔⴻⴹ?',
+    description: 'ⴰⴳⵍⴰⵎ',
+    describeYourItem: 'ⴳⵍⴻⵎ ⴰⴼⴰⵔⵉⵙ-ⵉⴽ, ⴰⴷⴷⴰⴷ-ⵉⵙ, ⴷ ⵡⴰⵢⴻⵏ ⵢⴻⵍⵍⴰⵏ ⴷⴻⴳ-ⵙ...',
+    category: 'ⵜⴰⴳⴳⴰⵢⵜ',
+    selectCategory: 'ⴼⵔⴻⵏ ⵜⴰⴳⴳⴰⵢⵜ',
+    electronics: 'ⵜⵉⵍⵉⴽⵙⴰⵙ',
+    photography: 'ⵜⴰⵙⵓⴽⴽⴻⵏⵜ',
+    gaming: 'ⵓⵔⴰⵔⴻⵏ',
+    sports: 'ⴰⴷⴷⴰⵍ',
+    music: 'ⴰⵥⴰⵡⴰⵏ',
+    tools: 'ⵉⴼⴻⵛⴽⴰ',
+    vehicles: 'ⵜⴽⴻⵔⵔⵓⵙⵉⵏ',
+    other: 'ⵏⵏⵉⴹⴻⵏ',
+    pricing: 'ⵙⵙⵓⵎⴰ',
+    dailyRate: 'ⵙⵙⵓⵎⴰ ⵏ ⵡⴰⵙⵙ (DZD)',
+    location: 'ⴰⴷⵉⴳ',
+    
+    // Cities
+    algiers: 'ⵍⴻⵣⵣⴰⵢⴻⵔ',
+    oran: 'ⵡⴻⵀⵔⴰⵏ',
+    constantine: 'ⵇⵙⴻⵏⵜⵉⵏⴰ',
+    annaba: 'ⵄⴻⵏⵏⴰⴱⴰ',
+    blida: 'ⵍⴻⴱⵍⵉⴷⴰ',
+    batna: 'ⵜⴱⴰⵜⴻⵏⵜ',
+    setif: 'ⵙⵟⵉⴼ',
+    sidibelabbes: 'ⵙⵉⴷⵉ ⴱⴻⵍ-ⵄⴻⴱⴱⴻⵙ',
+    biskra: 'ⴱⵉⵙⴽⵔⴰ',
+    tebessa: 'ⵜⴱⴻⵙⵙⴰ',
+    tlemcen: 'ⵜⵍⴻⵎⵙⴻⵏ',
+    bejaia: 'ⴱⴳⴰⵢⴻⵜ',
+    tiaret: 'ⵜⵉⴰⵔⴻⵜ',
+    bordjbouarreridj: 'ⴱⵓⵔⴷⵊ ⴱⵓ-ⵄⴻⵔⵔⵉⴷⵊ',
+    djelfa: 'ⵊⴻⵍⴼⴰ',
+    mostaganem: 'ⵎⵓⵙⵜⴰⵖⴰⵏⴻⵎ',
+    
+    // Footer
+    aboutUs: 'ⵖⴼ-ⵏⵏⴻⵖ',
+    aboutDescription: 'DZ-RentIt ⴷ ⵜⴰⵍⵖⵓⴱⵍⵉⵟ ⵜⴰⵎⴻⵇⵇⵔⴰⵏⵜ ⵏ ⵓⵙⵓⵖⵓⵔ ⴷⴻⴳ ⵍⴻⵣⵣⴰⵢⴻⵔ, ⵜⴻⵙⵙⴻⴷⵓⴽⵓⵍ ⵉⵎⴷⴰⵏⴻⵏ ⵢⴻⵍⵍⴰⵏ ⵖⵓⵔ-ⵙⴻⵏ ⵜⵉⵖⴰⵡⵙⵉⵡⵉⵏ ⴰⴽⴽⴻⴷ ⵡⵉⴷ ⵢⴻⴱⵖⴰⵏ ⴰⴷ ⵜⴻⵏⵜ-ⵙⵙⵙⵓⵖⵔⴻⵏ.',
+    quickLinks: 'ⵉⵙⴻⵖⵡⴰⵏ ⵓⵔⴰⵔⴻⵏ',
+    howItWorks: 'ⴰⵎⴻⴽ ⵉⵜⴻⴷⴷⵓ',
+    termsConditions: 'ⵜⵉⵡⵜⵉⵍⵉⵏ ⴷ ⵜⵏⴰⴼⴼⵓⵜⵉⵏ',
+    support: 'ⵜⴰⵍⵍⴰⵍⵜ',
+    faq: 'ⵉⵙⵜⴻⵇⵙⵉⵢⴻⵏ',
+    helpCenter: 'ⴰⵎⵎⴰⵙ ⵏ ⵜⴰⵍⵍⴰⵍⵜ',
+    contactSupport: 'ⵏⴻⵔⵎⴻⵙ ⵜⴰⵍⵍⴰⵍⵜ',
+    followUs: 'ⴹⴼⴻⵔ-ⴰⵖ',
+    allRightsReserved: 'ⵉⵣⴻⵔⴼⴰⵏ ⵎⴻⵕⵕⴰ ⵜⵜⵡⵃⴻⵔⵣⴻⵏ.',
+    madeWithLove: 'ⵢⴻⵜⵜⵡⴰⴳ ⵙ ❤️ ⴷⴻⴳ ⵍⴻⵣⵣⴰⵢⴻⵔ',
+    
+    // Payments
+    payments: 'ⵍⴻⵅⵍⴰⵚⴰⵜ',
+    manageTransactions: 'ⵙⴻⴼⵔⴻⴽ ⵜⵉⵏⴰⵡⴰⵢⵉⵏ-ⵉⴽ ⴷ ⵓⵎⴻⵣⵔⵓⵢ ⵏ ⵍⴻⵅⵍⴰⵚ',
+    backToDashboard: 'ⵓⵖⴰⵍ ⵖⴻⵔ ⵜⴼⴻⵍⵡⵉⵜ ⵏ ⵓⵙⴻⵏⵇⴻⴷ',
+    received: 'ⵢⴻⵜⵜⵡⴰⵔⴻⵎ',
+    sent: 'ⵢⴻⵜⵜⵡⴰⵣⴻⵏ',
+    totalEarnings: 'ⴰⵙⵎⴻⴽⵜⵉ ⵏ ⵜⵇⴰⵄⵉⵏ',
+    totalSpent: 'ⴰⵙⵎⴻⴽⵜⵉ ⵏ ⵓⵙⴰⵔⴰⴼ',
+    awaitingProcessing: 'ⵢⴻⵜⵜⵔⴰⵊⵊⵓ ⴰⵙⴻⵙⴼⴻⵔ',
+    allTransactions: 'ⴰⴽⴽ ⵜⵉⵏⴰⵡⴰⵢⵉⵏ',
+    paymentMethods: 'ⵜⴰⵔⵔⴰⵢⵉⵏ ⵏ ⵍⴻⵅⵍⴰⵚ',
+    noTransactionsFound: 'ⵓⵍⴰⵛ ⵜⵉⵏⴰⵡⴰⵢⵉⵏ',
+    transactionHistory: 'ⴰⵎⴻⵣⵔⵓⵢ ⵏ ⵍⴻⵅⵍⴰⵚⴰⵜ-ⵉⴽ ⴰⴷ ⴷ-ⵉⴱⴰⵏ ⴷⴰⴳⵉ',
+    paymentFrom: 'ⵍⴻⵅⵍⴰⵚ ⵙⴻⴳ',
+    paymentTo: 'ⵍⴻⵅⵍⴰⵚ ⵖⴻⵔ',
+    pendingFrom: 'ⵢⴻⵜⵜⵔⴰⵊⵊⵓ ⵙⴻⴳ',
+    viewReceipt: 'ⵡⴰⵍⵉ ⴰⴼⴻⵛⴽⵓ',
+    transactionId: 'ⵓⵟⵟⵓⵏ ⵏ ⵜⵏⴰⵡⴰⵢⵜ',
+    
+    // Messages
+    messages: 'ⵉⵣⵏⴰⵏ',
+    search: 'ⵏⴰⴷⵉ',
+    searchConversations: 'ⵏⴰⴷⵉ ⴷⴻⴳ ⵉⴷⵉⵡⴻⵏⵏⵉⵢⴻⵏ...',
+    typeMessage: 'ⴰⵔⵓ ⵉⵣⴻⵏ...',
+    noConversationsYet: 'ⵓⵍⴰⵛ ⵉⴷⵉⵡⴻⵏⵏⵉⵢⴻⵏ ⴰⵔ ⵜⵓⵔⴰ',
+    startChatting: 'ⴱⴷⵓ ⴰⴷⵉⵡⴻⵏⵏⵉ ⴰⴽⴽⴻⴷ ⵢⵉⵎⴰⵡⵍⴰⵏ ⵏ ⵜⴻⵖⴰⵡⵙⵉⵡⵉⵏ ⵏⴻⵖ ⵉⵙⴻⵖⵔⴻⵏ',
+    selectConversation: 'ⴼⵔⴻⵏ ⴰⴷⵉⵡⴻⵏⵏⵉ',
+    chooseConversation: 'ⴼⵔⴻⵏ ⴰⴷⵉⵡⴻⵏⵏⵉ ⵙⴻⴳ ⵜⴻⴱⴷⴰⵔⵜ ⵉ ⵡⴰⴽⴽⴻⵏ ⴰⴷ ⵜⴻⴱⴷⵓⴹ',
+    
+    // Dashboard
+    notifications: 'ⵉⵍⵖⴰ',
+    items: 'ⵜⵉⵖⴰⵡⵙⵉⵡⵉⵏ',
+    rentals: 'ⵉⵙⵓⵖⵔⴰ',
+    markAllAsRead: 'ⵛⵔⴻⴹ ⵎⴻⵕⵕⴰ ⴷ ⵉⵖⵔⴰⵏ',
+    noNotifications: 'ⵓⵍⴰⵛ ⵉⵍⵖⴰ',
+    allCaughtUp: 'ⵜⴻⵥⵔⵉⴹ ⴽⵓⵍⵍⴻⵛ!',
+    quickAccess: 'ⴰⵏⴻⴽⵛⵓⵎ ⴰⵔⵓⵔⴰⴷ',
+    viewRentalsItems: 'ⵡⴰⵍⵉ ⵉⵙⵓⵖⵔⴰ-ⴽ ⴷ ⵜⴻⵖⴰⵡⵙⵉⵡⵉⵏ-ⵉⴽ',
+    chatWithUsers: 'ⵎⵎⴻⵙⵍⴰⵢ ⴰⴽⴽⴻⴷ ⵢⵉⵎⴰⵡⵍⴰⵏ ⴷ ⵉⵙⴻⵖⵔⴻⵏ',
+    publishItem: 'ⴱⴹⵓ ⴰⴼⴰⵔⵉⵙ',
+    listNewRental: 'ⴱⴹⵓ ⴰⴼⴰⵔⵉⵙ ⴰⵎⴰⵢⵏⵓ ⵏ ⵓⵙⵓⵖⵓⵔ',
+    settings: 'ⵉⵖⴻⵡⵡⴰⵕⴻⵏ',
+    accountPreferences: 'ⴰⵎⵉⴹⴰⵏ ⴷ ⵓⵙⵎⴻⵏⵢⵉⴼ',
+    
+    // Item Detail
+    availability: 'ⵜⵉⵡⵉⵣⵉ',
+    available: 'ⵢⴻⵍⵍⴰⵏ',
+    unavailable: 'ⵓⵍⴰⵛ-ⵉⵜ',
+    owner: 'ⴱⴰⴱ',
+    rentNow: 'ⵙⵙⵓⵖⴻⵔ ⵜⵓⵔⴰ',
+    sendMessage: 'ⴰⵣⴻⵏ ⵉⵣⴻⵏ',
+    reviews: 'ⵜⵉⴽⵜⵓⵔⵉⵏ',
+    noReviewsYet: 'ⵓⵍⴰⵛ ⵜⵉⴽⵜⵓⵔⵉⵏ ⴰⵔ ⵜⵓⵔⴰ',
+    firstToReview: 'ⵉⵍⵉ ⴷ ⴰⵎⴻⵣⵡⴰⵔⵓ ⴰⵔⴰ ⴷ-ⵢⴻⴼⴽⴻⵏ ⵜⵉⴽⵜⵉ',
+    similarItems: 'ⵜⵉⵖⴰⵡⵙⵉⵡⵉⵏ ⵉⵛⵓⴷⴷⴻⵏ',
+    
+    // Public Profile
+    itemsListed: 'ⵜⵉⵖⴰⵡⵙⵉⵡⵉⵏ ⵢⴻⵜⵜⵡⴰⴱⴹⴰⵏ',
+    rating: 'ⵜⴰⴽⵜⵓⵔⵜ',
+    memberSince: 'ⴰⵄⴻⴳⴳⴰⵍ ⵙⴻⴳ',
+    viewAllItems: 'ⵡⴰⵍⵉ ⴰⴽⴽ ⵜⵉⵖⴰⵡⵙⵉⵡⵉⵏ',
+    ownerReviews: 'ⵜⵉⴽⵜⵓⵔⵉⵏ ⵏ ⵓⵎⴰⵡⵍⴰⵏ',
+    writeReview: 'ⴰⵔⵓ ⵜⴰⴽⵜⵓⵔⵜ',
+    yourReview: 'ⵜⴰⴽⵜⵓⵔⵜ-ⵉⴽ',
+    submitReview: 'ⴰⵣⴻⵏ ⵜⴰⴽⵜⵓⵔⵜ',
+    helpful: 'ⵢⴻⵜⵜⵄⵉⵡⴻⵏ',
+    professional: 'ⴰⵙⵏⴰⵡⴰⵏ',
+    responsive: 'ⵢⴻⵜⵜⵄⴰⵡⴰⵏ ⵙ ⵜⵄⴻⴳⴳⴻⵍⵜ'
   }
 };
 
@@ -418,13 +808,19 @@ export const LanguageProvider = ({ children }) => {
     }
   }, []);
 
-  const toggleLanguage = () => {
-    const newLanguage = language === 'en' ? 'ar' : 'en';
+  const changeLanguage = (newLanguage) => {
     setLanguage(newLanguage);
     setIsRTL(newLanguage === 'ar');
     localStorage.setItem('language', newLanguage);
     document.documentElement.dir = newLanguage === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = newLanguage;
+  };
+
+  const toggleLanguage = () => {
+    const languages = ['en', 'ar', 'kab', 'kab_tfng'];
+    const currentIndex = languages.indexOf(language);
+    const nextIndex = (currentIndex + 1) % languages.length;
+    changeLanguage(languages[nextIndex]);
   };
 
   const t = (key) => {
@@ -435,6 +831,7 @@ export const LanguageProvider = ({ children }) => {
     language,
     isRTL,
     toggleLanguage,
+    changeLanguage,
     t
   };
 

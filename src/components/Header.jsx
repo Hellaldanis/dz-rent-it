@@ -7,13 +7,15 @@ import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 
 export default function Header({ showAddButton = false, hideSearch = false }) {
   const { user, isAuthenticated, logout } = useAuth();
-  const { language, toggleLanguage, t } = useLanguage();
+  const { language, toggleLanguage, changeLanguage, t } = useLanguage();
   const { isDark, toggleTheme } = useTheme();
   const { favoritesCount } = useFavorites();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showDashboardMenu, setShowDashboardMenu] = useState(false);
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const dropdownRef = useRef(null);
   const dashboardMenuRef = useRef(null);
+  const languageMenuRef = useRef(null);
 
   // Mock notification counts - in production, fetch from API/Context
   const [unreadMessages, setUnreadMessages] = useState(3);
@@ -33,6 +35,9 @@ export default function Header({ showAddButton = false, hideSearch = false }) {
     }
     if (dashboardMenuRef.current && !dashboardMenuRef.current.contains(event.target)) {
       setShowDashboardMenu(false);
+    }
+    if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+      setShowLanguageMenu(false);
     }
   }, []);
 
@@ -89,13 +94,100 @@ export default function Header({ showAddButton = false, hideSearch = false }) {
             </span>
           </button>
           
-          <button
-            onClick={toggleLanguage}
-            className="flex items-center justify-center h-10 w-10 rounded-full bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark font-bold text-sm transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
-            title={language === 'en' ? 'العربية' : 'English'}
-          >
-            {language === 'en' ? 'ع' : 'EN'}
-          </button>
+          {/* Language Selector */}
+          <div className="relative" ref={languageMenuRef}>
+            <button
+              onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+              className="flex items-center justify-center gap-1 h-10 px-3 rounded-full bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark font-bold text-sm transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+              title="Change Language"
+            >
+              <span className="material-symbols-outlined text-base">translate</span>
+              <span>
+                {
+                  language === 'en' ? 'EN' :
+                  language === 'ar' ? 'ع' :
+                  language === 'kab' ? 'Kab' :
+                  'ⵜⴼⵏ'
+                }
+              </span>
+            </button>
+
+            {showLanguageMenu && (
+              <div className="absolute right-0 mt-2 w-56 rounded-lg bg-background-light dark:bg-secondary-dark border border-secondary-light dark:border-secondary-dark shadow-lg py-2 animate-fade-in z-50">
+                <div className="px-3 py-2 text-xs font-semibold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wider">
+                  Select Language
+                </div>
+                <button
+                  onClick={() => {
+                    changeLanguage('en');
+                    setShowLanguageMenu(false);
+                  }}
+                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                    language === 'en'
+                      ? 'bg-primary/10 text-primary font-semibold'
+                      : 'text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <span className="text-lg">🇬🇧</span>
+                  <span className="flex-1 text-left">English</span>
+                  {language === 'en' && (
+                    <span className="material-symbols-outlined text-primary text-base">check</span>
+                  )}
+                </button>
+                <button
+                  onClick={() => {
+                    changeLanguage('ar');
+                    setShowLanguageMenu(false);
+                  }}
+                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                    language === 'ar'
+                      ? 'bg-primary/10 text-primary font-semibold'
+                      : 'text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <span className="text-lg">🇩🇿</span>
+                  <span className="flex-1 text-left">العربية</span>
+                  {language === 'ar' && (
+                    <span className="material-symbols-outlined text-primary text-base">check</span>
+                  )}
+                </button>
+                <button
+                  onClick={() => {
+                    changeLanguage('kab');
+                    setShowLanguageMenu(false);
+                  }}
+                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                    language === 'kab'
+                      ? 'bg-primary/10 text-primary font-semibold'
+                      : 'text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <span className="text-lg">🇩🇿</span>
+                  <span className="flex-1 text-left">Tamaziɣt (Latin)</span>
+                  {language === 'kab' && (
+                    <span className="material-symbols-outlined text-primary text-base">check</span>
+                  )}
+                </button>
+                <button
+                  onClick={() => {
+                    changeLanguage('kab_tfng');
+                    setShowLanguageMenu(false);
+                  }}
+                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                    language === 'kab_tfng'
+                      ? 'bg-primary/10 text-primary font-semibold'
+                      : 'text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <span className="text-lg">🇩🇿</span>
+                  <span className="flex-1 text-left">ⵜⴰⵎⴰⵣⵉⵖⵜ (Tifinagh)</span>
+                  {language === 'kab_tfng' && (
+                    <span className="material-symbols-outlined text-primary text-base">check</span>
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
           
           {isAuthenticated ? (
             <div className="flex items-center gap-4">

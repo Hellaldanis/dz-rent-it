@@ -24,7 +24,15 @@ export default function Catalog() {
   const [sortBy, setSortBy] = useState('relevance');
   const [locationFilter, setLocationFilter] = useState('');
   const [minRating, setMinRating] = useState(0);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [searchHistory, setSearchHistory] = useState([]);
   const navigate = useNavigate();
+
+  // Load search history from localStorage
+  useEffect(() => {
+    const history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+    setSearchHistory(history);
+  }, []);
 
   // Scroll vers le haut quand la page se charge
   useEffect(() => {
@@ -47,6 +55,35 @@ export default function Catalog() {
       setSearchQuery(searchParam);
     }
   }, [searchParams]);
+
+  // Generate search suggestions
+  const suggestions = searchQuery.length > 0 
+    ? mockItems
+        .filter(item => 
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.location.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .slice(0, 5)
+        .map(item => ({
+          id: item.id,
+          text: item.title,
+          category: item.category,
+          location: item.location
+        }))
+    : searchHistory.slice(0, 3).map((text, idx) => ({ id: `history-${idx}`, text, isHistory: true }));
+
+  const handleSearchSelect = (text) => {
+    setSearchQuery(text);
+    setShowSuggestions(false);
+    
+    // Save to search history
+    if (!searchHistory.includes(text)) {
+      const newHistory = [text, ...searchHistory].slice(0, 10);
+      setSearchHistory(newHistory);
+      localStorage.setItem('searchHistory', JSON.stringify(newHistory));
+    }
+  };
 
   // Fonction de filtrage complète
   const filteredItems = mockItems.filter(item => {
@@ -281,23 +318,58 @@ export default function Catalog() {
 
               {/* Search bar */}
               <div className="relative mb-4">
-                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark">
+                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark z-10">
                   search
                 </span>
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => setShowSuggestions(true)}
+                  onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                   placeholder="Search items by title or description..."
                   className="w-full pl-10 pr-4 py-3 rounded-lg border border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-secondary-dark text-text-light dark:text-text-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark focus:border-primary focus:ring-2 focus:ring-primary/30"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark hover:text-text-light dark:hover:text-text-dark"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark hover:text-text-light dark:hover:text-text-dark z-10"
                   >
                     <span className="material-symbols-outlined">close</span>
                   </button>
+                )}
+                
+                {/* Autocomplete suggestions */}
+                {showSuggestions && suggestions.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-background-light dark:bg-secondary-dark border border-secondary-light dark:border-secondary-dark rounded-lg shadow-lg z-20 overflow-hidden">
+                    {searchQuery.length === 0 && searchHistory.length > 0 && (
+                      <div className="px-4 py-2 text-xs text-text-muted-light dark:text-text-muted-dark border-b border-secondary-light dark:border-secondary-dark">
+                        Recent searches
+                      </div>
+                    )}
+                    {suggestions.map((suggestion) => (
+                      <button
+                        key={suggestion.id}
+                        onClick={() => handleSearchSelect(suggestion.text)}
+                        className="w-full px-4 py-3 flex items-center gap-3 hover:bg-secondary-light dark:hover:bg-background-dark transition-colors text-left"
+                      >
+                        <span className="material-symbols-outlined text-text-muted-light dark:text-text-muted-dark">
+                          {suggestion.isHistory ? 'history' : 'search'}
+                        </span>
+                        <div className="flex-1">
+                          <p className="text-sm text-text-light dark:text-text-dark">{suggestion.text}</p>
+                          {!suggestion.isHistory && (
+                            <p className="text-xs text-text-muted-light dark:text-text-muted-dark">
+                              {suggestion.category} • {suggestion.location}
+                            </p>
+                          )}
+                        </div>
+                        <span className="material-symbols-outlined text-text-muted-light dark:text-text-muted-dark text-sm">
+                          north_west
+                        </span>
+                      </button>
+                    ))}
+                  </div>
                 )}
               </div>
 

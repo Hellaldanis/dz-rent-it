@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Footer from '../components/Footer';
 
@@ -11,6 +11,8 @@ export default function Login() {
   });
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnUrl = location.state?.returnUrl || '/dashboard';
 
   const handleChange = (e) => {
     setFormData({
@@ -31,7 +33,7 @@ export default function Login() {
     };
     
     login(userData);
-    navigate('/dashboard');
+    navigate(returnUrl);
   };
 
   const handleGoogleLogin = () => {
@@ -44,7 +46,7 @@ export default function Login() {
     };
     
     login(userData);
-    navigate('/dashboard');
+    navigate(returnUrl);
   };
 
   return (

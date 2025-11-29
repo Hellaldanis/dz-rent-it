@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import DashboardStats from '../components/DashboardStats';
 
 const mockRentals = [
   {
@@ -120,6 +122,7 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('rentals');
   const [isScrolled, setIsScrolled] = useState(false);
   const [notifications, setNotifications] = useState(mockNotifications);
+  const [drafts, setDrafts] = useState([]);
   const { t } = useLanguage();
   const navigate = useNavigate();
 
@@ -131,6 +134,37 @@ export default function Dashboard() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Load drafts from localStorage
+  useEffect(() => {
+    try {
+      const d = JSON.parse(localStorage.getItem('itemDrafts') || '[]');
+      setDrafts(Array.isArray(d) ? d : []);
+    } catch (e) {
+      setDrafts([]);
+    }
+  }, []);
+
+  const handleEditDraft = (draft, index) => {
+    navigate('/publish', { state: { draft, draftIndex: index } });
+  };
+
+  const handleDeleteDraft = (index) => {
+    const updated = drafts.slice();
+    updated.splice(index, 1);
+    localStorage.setItem('itemDrafts', JSON.stringify(updated));
+    setDrafts(updated);
+    toast.success('Draft deleted');
+  };
+
+  const handlePublishDraft = (index) => {
+    // For now, simulate publish by removing draft and notifying user.
+    const updated = drafts.slice();
+    const [published] = updated.splice(index, 1);
+    localStorage.setItem('itemDrafts', JSON.stringify(updated));
+    setDrafts(updated);
+    toast.success(`${published.title || 'Item'} published`);
+  };
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
@@ -209,6 +243,60 @@ export default function Dashboard() {
           </Link>
         </div>
 
+        {/* Statistics Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="p-6 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg">
+            <div className="flex items-center justify-between mb-2">
+              <span className="material-symbols-outlined text-3xl opacity-80">shopping_bag</span>
+              <span className="text-sm font-medium opacity-80">This Month</span>
+            </div>
+            <p className="text-3xl font-black mb-1">12</p>
+            <p className="text-sm opacity-90">Active Rentals</p>
+            <div className="mt-3 flex items-center gap-1 text-sm">
+              <span className="material-symbols-outlined text-sm">trending_up</span>
+              <span>+18% from last month</span>
+            </div>
+          </div>
+
+          <div className="p-6 rounded-xl bg-gradient-to-br from-green-500 to-green-600 text-white shadow-lg">
+            <div className="flex items-center justify-between mb-2">
+              <span className="material-symbols-outlined text-3xl opacity-80">payments</span>
+              <span className="text-sm font-medium opacity-80">Total</span>
+            </div>
+            <p className="text-3xl font-black mb-1">$2,450</p>
+            <p className="text-sm opacity-90">Earnings</p>
+            <div className="mt-3 flex items-center gap-1 text-sm">
+              <span className="material-symbols-outlined text-sm">trending_up</span>
+              <span>+24% from last month</span>
+            </div>
+          </div>
+
+          <div className="p-6 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-lg">
+            <div className="flex items-center justify-between mb-2">
+              <span className="material-symbols-outlined text-3xl opacity-80">star</span>
+              <span className="text-sm font-medium opacity-80">Average</span>
+            </div>
+            <p className="text-3xl font-black mb-1">4.8</p>
+            <p className="text-sm opacity-90">Rating</p>
+            <div className="mt-3 flex items-center gap-1 text-sm">
+              <span>Based on 47 reviews</span>
+            </div>
+          </div>
+
+          <div className="p-6 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg">
+            <div className="flex items-center justify-between mb-2">
+              <span className="material-symbols-outlined text-3xl opacity-80">visibility</span>
+              <span className="text-sm font-medium opacity-80">This Week</span>
+            </div>
+            <p className="text-3xl font-black mb-1">328</p>
+            <p className="text-sm opacity-90">Profile Views</p>
+            <div className="mt-3 flex items-center gap-1 text-sm">
+              <span className="material-symbols-outlined text-sm">trending_up</span>
+              <span>+12% from last week</span>
+            </div>
+          </div>
+        </div>
+
         {/* Tabs */}
         <div className="pb-3 mb-6">
           <div className="flex border-b border-secondary-light dark:border-secondary-dark gap-4 sm:gap-8">
@@ -267,6 +355,17 @@ export default function Dashboard() {
                 3
               </span>
             </button>
+            <button
+              onClick={() => setActiveTab('stats')}
+              className={`relative flex items-center justify-center border-b-[3px] pb-3 pt-2 gap-2 transition-colors ${
+                activeTab === 'stats'
+                  ? 'border-b-primary text-text-light dark:text-text-dark'
+                  : 'border-b-transparent text-text-muted-light dark:text-text-muted-dark'
+              }`}
+            >
+              <span className="material-symbols-outlined text-lg">bar_chart</span>
+              <p className="text-sm font-bold">Statistics</p>
+            </button>
           </div>
         </div>
 
@@ -323,6 +422,33 @@ export default function Dashboard() {
             <h2 className="text-text-light dark:text-text-dark text-[22px] font-bold mb-4">
               My Listed Items
             </h2>
+
+            {/* Drafts Section */}
+            {drafts.length > 0 && (
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-text-light dark:text-text-dark mb-3">Drafts</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  {drafts.map((draft, i) => (
+                    <div key={i} className="flex flex-col gap-3 rounded-xl bg-background-light dark:bg-secondary-dark p-4 shadow-sm">
+                      <div className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" style={{ backgroundImage: `url("${(draft.images && draft.images[0] && draft.images[0].preview) || ''}")` }} />
+                      <div className="flex flex-col gap-1">
+                        <div className="flex justify-between items-center">
+                          <p className="text-text-light dark:text-text-dark text-base font-bold">{draft.title || 'Untitled'}</p>
+                          <span className="text-xs text-text-muted-light dark:text-text-muted-dark">Draft</span>
+                        </div>
+                        <p className="text-text-muted-light dark:text-text-muted-dark text-sm">{draft.createdAt ? new Date(draft.createdAt).toLocaleString() : ''}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <button onClick={() => handleEditDraft(draft, i)} className="flex-1 py-2 px-4 bg-primary text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">Edit</button>
+                        <button onClick={() => handlePublishDraft(i)} className="py-2 px-4 border border-secondary-light dark:border-secondary-dark rounded-lg text-sm font-medium text-text-light dark:text-text-dark hover:bg-secondary-light dark:hover:bg-gray-800 transition-colors">Publish</button>
+                        <button onClick={() => handleDeleteDraft(i)} className="py-2 px-4 border border-red-500 text-red-500 rounded-lg text-sm font-medium hover:bg-red-50 transition-colors">Delete</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {mockMyItems.map((item) => (
                 <div
@@ -412,7 +538,7 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
-        ) : (
+        ) : activeTab === 'messages' ? (
           <div>
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-text-light dark:text-text-dark text-[22px] font-bold">
@@ -485,7 +611,9 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-        )}
+        ) : activeTab === 'stats' ? (
+          <DashboardStats />
+        ) : null}
       </main>
 
       <Footer />
